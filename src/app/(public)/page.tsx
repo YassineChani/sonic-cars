@@ -8,7 +8,7 @@ import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CTASection } from "@/components/home/CTASection";
 import { prisma } from "@/lib/prisma";
 
-export const revalidate = 3600; // Revalidate every hour
+export const dynamic = 'force-dynamic';
 
 async function getFeaturedCars() {
   return prisma.car.findMany({

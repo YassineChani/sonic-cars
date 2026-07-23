@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+export const dynamic = 'force-dynamic';
 import { prisma } from "@/lib/prisma";
 import { CarDetailGallery } from "@/components/cars/CarDetailGallery";
 import { BookingWidget } from "@/components/booking/BookingWidget";

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Nos Agences — Location de Voiture à Oujda et Tanger",
