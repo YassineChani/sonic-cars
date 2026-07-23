@@ -1,0 +1,171 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admin_users")
+}
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  address     String?
+  phone       String?
+  whatsapp    String?
+  email       String?
+  mapEmbedUrl String?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  cars        Car[]
+
+  @@map("locations")
+}
+
+model Car {
+  id              String   @id @default(cuid())
+  title           String
+  brand           String
+  model           String
+  year            Int
+  slug            String   @unique
+  locationId      String
+  location        Location @relation(fields: [locationId], references: [id])
+  dailyPrice      Float
+  weeklyPrice     Float?
+  monthlyPrice    Float?
+  transmission    String   // "Manuelle" | "Automatique"
+  fuelType        String   // "Essence" | "Diesel" | "Électrique" | "Hybride"
+  seats           Int
+  doors           Int
+  luggageCapacity Int
+  airConditioning Boolean  @default(true)
+  mileage         String   @default("Illimité")
+  availability    Boolean  @default(true)
+  featured        Boolean  @default(false)
+  mainImage       String?
+  description     String?
+  features        String   @default("[]")
+  pickupLocation  String?
+  returnLocation  String?
+  insuranceNotes  String?
+  rentalNotes     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  images             CarImage[]
+  bookings           Booking[]
+  availabilityBlocks AvailabilityBlock[]
+
+  @@map("cars")
+}
+
+model CarImage {
+  id        String   @id @default(cuid())
+  carId     String
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("car_images")
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  bookingRef  String        @unique
+  carId       String
+  car         Car           @relation(fields: [carId], references: [id])
+  fullName    String
+  phone       String
+  whatsapp    String?
+  email       String
+  pickupCity  String
+  returnCity  String
+  pickupDate  DateTime
+  pickupTime  String
+  returnDate  DateTime
+  returnTime  String
+  totalDays   Int
+  totalPrice  Float?
+  status      String        @default("PENDING")
+  message     String?
+  documentUrl String?
+  adminNotes  String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("bookings")
+}
+
+
+
+model AvailabilityBlock {
+  id        String   @id @default(cuid())
+  carId     String
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@map("availability_blocks")
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  city      String?
+  rating    Int      @default(5)
+  comment   String
+  avatar    String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  category  String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("text")
+  group     String?
+  label     String?
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
