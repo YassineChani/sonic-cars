@@ -8,29 +8,36 @@ import { BookingWidget } from "@/components/booking/BookingWidget";
 import { Users, Fuel, Settings, DoorClosed, Snowflake, ShieldCheck, MapPin, ArrowLeft, Star, Gauge } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const car = await prisma.car.findUnique({
-    where: { slug },
-    include: { location: true },
-  });
-
-  if (!car) return { title: "Voiture non trouvée" };
-
-  return {
-    title: `${car.brand} ${car.model} (${car.year}) — Location à ${car.location.name}`,
-    description: `Louez la ${car.brand} ${car.model} à ${car.location.name} à partir de ${car.dailyPrice} MAD/jour. Kilométrage illimité, assurance incluse.`,
-  };
+  try {
+    const { slug } = await params;
+    const car = await prisma.car.findUnique({
+      where: { slug },
+      include: { location: true },
+    });
+    if (!car) return { title: "Voiture non trouvée" };
+    return {
+      title: `${car.brand} ${car.model} (${car.year}) — Location à ${car.location.name}`,
+      description: `Louez la ${car.brand} ${car.model} à ${car.location.name} à partir de ${car.dailyPrice} MAD/jour.`,
+    };
+  } catch {
+    return { title: "Location de Voiture — SONIC CARS" };
+  }
 }
 
 export default async function CarDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const car = await prisma.car.findUnique({
-    where: { slug },
-    include: {
-      location: true,
-      images: { orderBy: { order: "asc" } },
-    },
-  });
+  let car: any = null;
+  try {
+    car = await prisma.car.findUnique({
+      where: { slug },
+      include: {
+        location: true,
+        images: { orderBy: { order: "asc" } },
+      },
+    });
+  } catch {
+    car = null;
+  }
 
   if (!car) notFound();
 

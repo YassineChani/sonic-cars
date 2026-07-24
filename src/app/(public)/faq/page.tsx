@@ -6,11 +6,25 @@ export const metadata = {
   description: "Toutes les réponses à vos questions concernant la location de voiture à Oujda et Tanger.",
 };
 
+const FALLBACK_FAQS = [
+  { id: "1", question: "Quels documents sont nécessaires pour louer une voiture ?", answer: "Une pièce d'identité nationale ou passeport valide, un permis de conduire valide (minimum 1 an), et un acompte par carte bancaire ou espèces.", category: "Documents", order: 1, published: true },
+  { id: "2", question: "Quel est l'âge minimum pour louer une voiture ?", answer: "L'âge minimum est de 21 ans avec au moins 1 an de permis de conduire.", category: "Conditions", order: 2, published: true },
+  { id: "3", question: "Le kilométrage est-il limité ?", answer: "Non, tous nos véhicules sont proposés avec un kilométrage illimité.", category: "Tarifs", order: 3, published: true },
+  { id: "4", question: "Puis-je annuler ma réservation ?", answer: "Oui, vous pouvez annuler jusqu'à 24h avant la date de prise en charge sans frais.", category: "Réservation", order: 4, published: true },
+  { id: "5", question: "La livraison à domicile est-elle disponible ?", answer: "Oui, nous proposons la livraison et la reprise du véhicule à votre adresse pour un supplément.", category: "Services", order: 5, published: true },
+  { id: "6", question: "Comment effectuer une réservation ?", answer: "Remplissez notre formulaire en ligne ou contactez-nous via WhatsApp. Notre équipe vous confirmera la disponibilité sous 1h.", category: "Réservation", order: 6, published: true },
+];
+
 async function getFaqs() {
-  return prisma.fAQ.findMany({
-    where: { published: true },
-    orderBy: { order: "asc" },
-  });
+  try {
+    const faqs = await prisma.fAQ.findMany({
+      where: { published: true },
+      orderBy: { order: "asc" },
+    });
+    return faqs.length > 0 ? faqs : FALLBACK_FAQS;
+  } catch {
+    return FALLBACK_FAQS;
+  }
 }
 
 export default async function FAQPage() {

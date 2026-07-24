@@ -8,14 +8,22 @@ export const metadata = {
 };
 
 export default async function BookingPage() {
-  const [cars, locations] = await Promise.all([
-    prisma.car.findMany({
-      where: { availability: true },
-      include: { location: true },
-      orderBy: { brand: "asc" },
-    }),
-    prisma.location.findMany(),
-  ]);
+  let cars: any[] = [];
+  let locations: any[] = [];
+
+  try {
+    [cars, locations] = await Promise.all([
+      prisma.car.findMany({
+        where: { availability: true },
+        include: { location: true },
+        orderBy: { brand: "asc" },
+      }),
+      prisma.location.findMany(),
+    ]);
+  } catch {
+    cars = [];
+    locations = [];
+  }
 
   return (
     <div className="pt-28 pb-20">

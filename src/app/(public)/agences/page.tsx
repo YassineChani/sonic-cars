@@ -8,8 +8,18 @@ export const metadata = {
   description: "Retrouvez les adresses, numéros de téléphone et horaires de nos agences SONIC CARS à Oujda et Tanger.",
 };
 
+const FALLBACK_LOCATIONS = [
+  { id: "1", name: "Agence Oujda", slug: "oujda", description: "Notre agence principale au cœur d'Oujda, à proximité de l'aéroport.", address: "Boulevard Mohammed VI, Oujda 60000", phone: "+212536700000", whatsapp: "+212600000000", email: "oujda@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+  { id: "2", name: "Agence Tanger", slug: "tanger", description: "Notre agence à Tanger, idéalement située pour vos trajets vers le port et l'aéroport.", address: "Avenue Mohammed V, Tanger 90000", phone: "+212539000000", whatsapp: "+212600000000", email: "tanger@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+];
+
 async function getLocations() {
-  return prisma.location.findMany();
+  try {
+    const locs = await prisma.location.findMany();
+    return locs.length > 0 ? locs : FALLBACK_LOCATIONS;
+  } catch {
+    return FALLBACK_LOCATIONS;
+  }
 }
 
 export default async function AgencesPage() {
