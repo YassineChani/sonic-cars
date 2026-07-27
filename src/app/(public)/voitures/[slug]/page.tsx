@@ -84,16 +84,10 @@ export default async function CarDetailPage({ params }: { params: Promise<{ slug
           </div>
 
           <div className="text-left lg:text-right">
-            <div className="text-white/40 text-xs uppercase tracking-wider mb-1">À partir de</div>
-            <div className="flex items-baseline gap-1">
-              <span
-                className="text-4xl font-black text-red-500"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                {price.toLocaleString("fr-MA")}
-              </span>
-              <span className="text-white/60 text-sm">MAD / jour</span>
-            </div>
+            <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Disponibilité</div>
+            <span className="px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-bold text-sm">
+              Sur Demande / En Agence
+            </span>
           </div>
         </div>
 

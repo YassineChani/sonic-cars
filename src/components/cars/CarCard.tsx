@@ -44,14 +44,11 @@ export function CarCard({ car }: CarCardProps) {
           <span className="text-white/80 text-xs font-medium">{car.location.name}</span>
         </div>
 
-        {/* Price overlay */}
+        {/* Status overlay */}
         <div className="absolute bottom-3 right-3">
-          <div className="text-right">
-            <span className="text-red-400 font-black text-lg" style={{ fontFamily: "var(--font-outfit)" }}>
-              {price.toLocaleString("fr-MA")}
-            </span>
-            <span className="text-white/50 text-xs ml-1">MAD/j</span>
-          </div>
+          <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white/90 text-xs font-medium">
+            Sur Demande
+          </span>
         </div>
       </div>
 

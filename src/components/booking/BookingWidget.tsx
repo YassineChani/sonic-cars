@@ -244,20 +244,16 @@ export function BookingWidget({ car }: BookingWidgetProps) {
           </div>
         </div>
 
-        {/* Price Breakdown */}
+        {/* Duration summary */}
         {days > 0 && (
-          <div className="border-t border-b border-white/10 py-4 my-4 space-y-2">
+          <div className="border-t border-b border-white/10 py-3 my-3 space-y-1.5">
             <div className="flex justify-between text-xs text-white/60">
-              <span>{pricePerDay} MAD × {days} jour(s)</span>
-              <span>{totalPrice} MAD</span>
+              <span>Durée choisie</span>
+              <span className="text-white font-semibold">{days} jour(s)</span>
             </div>
             <div className="flex justify-between text-xs text-white/60">
-              <span>Assurance de base</span>
+              <span>Assurance & kilométrage</span>
               <span className="text-emerald-400 font-medium">Inclus</span>
-            </div>
-            <div className="flex justify-between text-sm font-bold text-white pt-2 border-t border-white/5">
-              <span>Total Estimé</span>
-              <span className="text-red-500 font-black text-lg">{totalPrice.toLocaleString("fr-MA")} MAD</span>
             </div>
           </div>
         )}

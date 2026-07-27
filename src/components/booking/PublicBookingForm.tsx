@@ -171,7 +171,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               >
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-white font-bold text-sm">{car.brand} {car.model}</span>
-                  <span className="text-red-400 font-bold text-xs">{car.dailyPrice} MAD/j</span>
+                  <span className="text-emerald-400 font-medium text-xs">Disponible</span>
                 </div>
                 <div className="text-white/40 text-xs flex justify-between">
                   <span>{car.transmission}</span>
@@ -323,18 +323,17 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
       </div>
 
-      {/* Pricing summary */}
+      {/* Duration summary */}
       {selectedCar && days > 0 && (
         <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center">
           <div>
             <div className="text-white font-bold">{selectedCar.brand} {selectedCar.model}</div>
-            <div className="text-white/40 text-xs">{days} jour(s) × {selectedCar.dailyPrice} MAD</div>
+            <div className="text-white/40 text-xs">Durée : {days} jour(s)</div>
           </div>
           <div className="text-right">
-            <div className="text-white/40 text-xs uppercase">Estimation</div>
-            <div className="text-red-500 font-black text-2xl" style={{ fontFamily: "var(--font-outfit)" }}>
-              {totalPrice.toLocaleString("fr-MA")} MAD
-            </div>
+            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-medium text-xs">
+              Assurance Incluse
+            </span>
           </div>
         </div>
       )}

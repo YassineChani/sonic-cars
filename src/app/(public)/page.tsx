@@ -4,7 +4,6 @@ import { FeaturedCars } from "@/components/home/FeaturedCars";
 import { WhyUs } from "@/components/home/WhyUs";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { LocationsSection } from "@/components/home/LocationsSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CTASection } from "@/components/home/CTASection";
 import { prisma } from "@/lib/prisma";
 
@@ -62,13 +61,33 @@ async function getFeaturedCars() {
       },
       {
         id: "3",
-        title: "Dacia Duster",
+        title: "Dacia Sandero Stepway",
         brand: "Dacia",
-        model: "Duster",
+        model: "Sandero Stepway",
         year: 2023,
-        slug: "dacia-duster-oujda",
-        dailyPrice: 400,
+        slug: "dacia-sandero-stepway-oujda",
+        dailyPrice: 300,
         transmission: "Manuelle",
+        fuelType: "Diesel",
+        seats: 5,
+        doors: 5,
+        luggageCapacity: 3,
+        airConditioning: true,
+        availability: true,
+        featured: true,
+        mainImage: "https://images.unsplash.com/photo-1568844293986-ca9c5c58e943?w=800&auto=format&fit=crop&q=80",
+        location: { id: "1", name: "Oujda", slug: "oujda" },
+        images: []
+      },
+      {
+        id: "4",
+        title: "Volkswagen T-Roc Sport",
+        brand: "Volkswagen",
+        model: "T-Roc Sport",
+        year: 2024,
+        slug: "volkswagen-t-roc-sport-tanger",
+        dailyPrice: 600,
+        transmission: "Automatique",
         fuelType: "Diesel",
         seats: 5,
         doors: 5,
@@ -76,34 +95,57 @@ async function getFeaturedCars() {
         airConditioning: true,
         availability: true,
         featured: true,
-        mainImage: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&auto=format&fit=crop&q=80",
+        mainImage: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&auto=format&fit=crop&q=80",
+        location: { id: "2", name: "Tanger", slug: "tanger" },
+        images: []
+      },
+      {
+        id: "5",
+        title: "Seat Leon FR",
+        brand: "Seat",
+        model: "Leon FR",
+        year: 2023,
+        slug: "seat-leon-fr-oujda",
+        dailyPrice: 500,
+        transmission: "Automatique",
+        fuelType: "Diesel",
+        seats: 5,
+        doors: 5,
+        luggageCapacity: 3,
+        airConditioning: true,
+        availability: true,
+        featured: true,
+        mainImage: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800&auto=format&fit=crop&q=80",
         location: { id: "1", name: "Oujda", slug: "oujda" },
+        images: []
+      },
+      {
+        id: "6",
+        title: "Peugeot 308",
+        brand: "Peugeot",
+        model: "308",
+        year: 2023,
+        slug: "peugeot-308-tanger",
+        dailyPrice: 450,
+        transmission: "Automatique",
+        fuelType: "Diesel",
+        seats: 5,
+        doors: 5,
+        luggageCapacity: 3,
+        airConditioning: true,
+        availability: true,
+        featured: true,
+        mainImage: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&auto=format&fit=crop&q=80",
+        location: { id: "2", name: "Tanger", slug: "tanger" },
         images: []
       }
     ] as any;
   }
-}
-
-async function getTestimonials() {
-  try {
-    return await prisma.testimonial.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
-      take: 6,
-    });
-  } catch (error) {
-    return [
-      { id: "1", name: "Karim Benali", city: "Oujda", rating: 5, comment: "Service exceptionnel ! Voiture propre et livraison rapide." },
-      { id: "2", name: "Nadia Boucetta", city: "Tanger", rating: 5, comment: "La meilleure agence de location à Tanger. Très professionnel." }
-    ] as any;
   }
 }
 
 export default async function HomePage() {
-  const [featuredCars, testimonials] = await Promise.all([
-    getFeaturedCars(),
-    getTestimonials(),
-  ]);
+  const featuredCars = await getFeaturedCars();
 
   return (
     <>
@@ -113,7 +155,6 @@ export default async function HomePage() {
       <WhyUs />
       <HowItWorks />
       <LocationsSection />
-      <TestimonialsSection testimonials={testimonials} />
       <CTASection />
     </>
   );
