@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { CarCard } from "@/components/cars/CarCard";
-import { Filter, SlidersHorizontal, RotateCcw } from "lucide-react";
+import { Filter, SlidersHorizontal, RotateCcw, Car } from "lucide-react";
 import { CarWithDetails } from "@/types";
 import { Location } from "@prisma/client";
 
@@ -12,60 +12,86 @@ interface FleetClientProps {
   locations: Location[];
 }
 
+const FEATURED_MODELS = [
+  { label: "Toute la Flotte", value: "" },
+  { label: "Clio 5", value: "Clio 5" },
+  { label: "Peugeot 208", value: "208" },
+  { label: "Dacia", value: "Dacia" },
+  { label: "T-Roc Sport", value: "T-Roc" },
+  { label: "Seat Leon FR", value: "Leon" },
+  { label: "Peugeot 308", value: "308" },
+];
+
 export function FleetClient({ initialCars, locations }: FleetClientProps) {
   const searchParams = useSearchParams();
 
+  const [modelTab, setModelTab] = useState("");
   const [cityFilter, setCityFilter] = useState(searchParams.get("city") || "");
-  const [categoryFilter, setCategoryFilter] = useState(searchParams.get("category") || "");
   const [transmissionFilter, setTransmissionFilter] = useState(searchParams.get("transmission") || "");
   const [fuelFilter, setFuelFilter] = useState(searchParams.get("fuel") || "");
-  const [brandFilter, setBrandFilter] = useState(searchParams.get("brand") || "");
-  const [sortBy, setSortBy] = useState("recommended");
-
-  // Extract unique brands and categories
-  const categories = useMemo(
-    () => Array.from(new Set(initialCars.map((c) => c.brand))),
-    [initialCars]
-  );
-  const brands = useMemo(
-    () => Array.from(new Set(initialCars.map((c) => c.brand))),
-    [initialCars]
-  );
 
   // Filter logic
   const filteredCars = useMemo(() => {
     return initialCars.filter((car) => {
+      // Model tab filter
+      if (modelTab) {
+        const query = modelTab.toLowerCase();
+        const matchesModel = car.model.toLowerCase().includes(query) || car.brand.toLowerCase().includes(query) || car.title.toLowerCase().includes(query);
+        if (!matchesModel) return false;
+      }
+
+      // City filter
       if (cityFilter && car.location.slug !== cityFilter.toLowerCase() && car.location.name.toLowerCase() !== cityFilter.toLowerCase()) {
         return false;
       }
+
+      // Transmission
       if (transmissionFilter && car.transmission !== transmissionFilter) return false;
+
+      // Fuel
       if (fuelFilter && car.fuelType !== fuelFilter) return false;
-      if (brandFilter && car.brand !== brandFilter) return false;
+
       return true;
-    }).sort((a, b) => {
-      if (sortBy === "price-asc") return Number(a.dailyPrice) - Number(b.dailyPrice);
-      if (sortBy === "price-desc") return Number(b.dailyPrice) - Number(a.dailyPrice);
-      return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
     });
-  }, [initialCars, cityFilter, categoryFilter, transmissionFilter, fuelFilter, brandFilter, sortBy]);
+  }, [initialCars, modelTab, cityFilter, transmissionFilter, fuelFilter]);
 
   function resetFilters() {
+    setModelTab("");
     setCityFilter("");
-    setCategoryFilter("");
     setTransmissionFilter("");
     setFuelFilter("");
-    setBrandFilter("");
-    setSortBy("recommended");
   }
 
   return (
-    <div>
-      {/* Filter Bar */}
-      <div className="glass border border-white/10 rounded-2xl p-6 mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2 text-white font-bold">
-            <SlidersHorizontal size={18} className="text-red-500" />
-            Filtres de recherche
+    <div className="space-y-8">
+
+      {/* Model Quick Filter Tabs */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        {FEATURED_MODELS.map((tab) => {
+          const isActive = modelTab === tab.value;
+          return (
+            <button
+              key={tab.label}
+              onClick={() => setModelTab(tab.value)}
+              className={`px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 ${
+                isActive
+                  ? "bg-red-500 text-white shadow-lg shadow-red-500/30 border border-red-400"
+                  : "glass border border-white/10 text-white/70 hover:text-white hover:border-white/30"
+              }`}
+            >
+              <Car size={16} className={isActive ? "text-white" : "text-red-500"} />
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Secondary Filter Bar */}
+      <div className="glass border border-white/10 rounded-2xl p-5">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2 text-white font-bold text-sm">
+            <SlidersHorizontal size={16} className="text-red-500" />
+            Filtres additionnels
           </div>
           <button
             onClick={resetFilters}
@@ -76,45 +102,17 @@ export function FleetClient({ initialCars, locations }: FleetClientProps) {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {/* City */}
           <select
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
-            className="input-dark text-sm py-2"
+            className="input-dark text-sm py-2.5"
           >
-            <option value="">Toutes les Villes</option>
+            <option value="">Toutes les Villes (Oujda & Tanger)</option>
             {locations.map((loc) => (
               <option key={loc.id} value={loc.slug}>
                 {loc.name}
-              </option>
-            ))}
-          </select>
-
-          {/* Category */}
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            className="input-dark text-sm py-2"
-          >
-            <option value="">Toutes Catégories</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-
-          {/* Brand */}
-          <select
-            value={brandFilter}
-            onChange={(e) => setBrandFilter(e.target.value)}
-            className="input-dark text-sm py-2"
-          >
-            <option value="">Toutes les Marques</option>
-            {brands.map((b) => (
-              <option key={b} value={b}>
-                {b}
               </option>
             ))}
           </select>
@@ -123,9 +121,9 @@ export function FleetClient({ initialCars, locations }: FleetClientProps) {
           <select
             value={transmissionFilter}
             onChange={(e) => setTransmissionFilter(e.target.value)}
-            className="input-dark text-sm py-2"
+            className="input-dark text-sm py-2.5"
           >
-            <option value="">Boîte de Vitesse</option>
+            <option value="">Toutes les Boîtes de Vitesse</option>
             <option value="Manuelle">Manuelle</option>
             <option value="Automatique">Automatique</option>
           </select>
@@ -134,32 +132,19 @@ export function FleetClient({ initialCars, locations }: FleetClientProps) {
           <select
             value={fuelFilter}
             onChange={(e) => setFuelFilter(e.target.value)}
-            className="input-dark text-sm py-2"
+            className="input-dark text-sm py-2.5"
           >
-            <option value="">Carburant</option>
+            <option value="">Tous les Carburants</option>
             <option value="Diesel">Diesel</option>
             <option value="Essence">Essence</option>
-            <option value="Hybride">Hybride</option>
-            <option value="Électrique">Électrique</option>
-          </select>
-
-          {/* Sort */}
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="input-dark text-sm py-2 border-red-500/30"
-          >
-            <option value="recommended">Recommandé</option>
-            <option value="price-asc">Prix : Croissant</option>
-            <option value="price-desc">Prix : Décroissant</option>
           </select>
         </div>
       </div>
 
       {/* Results Header */}
-      <div className="flex items-center justify-between mb-6">
-        <p className="text-white/50 text-sm">
-          <span className="text-white font-bold">{filteredCars.length}</span> véhicule(s) trouvé(s)
+      <div className="flex items-center justify-between">
+        <p className="text-white/60 text-sm">
+          Affichage de <span className="text-white font-bold">{filteredCars.length}</span> véhicule(s) dans le catalogue
         </p>
       </div>
 
@@ -171,13 +156,13 @@ export function FleetClient({ initialCars, locations }: FleetClientProps) {
           ))}
         </div>
       ) : (
-        <div className="glass border border-white/10 rounded-2xl p-16 text-center">
-          <Filter size={48} className="text-white/20 mx-auto mb-4" />
-          <h3 className="text-white font-bold text-lg mb-2">Aucun véhicule correspondant</h3>
-          <p className="text-white/40 text-sm mb-6 max-w-md mx-auto">
-            Essayez de modifier vos critères de recherche ou réinitialisez les filtres.
+        <div className="glass border border-white/10 rounded-2xl p-12 text-center space-y-4">
+          <Filter size={44} className="text-white/20 mx-auto" />
+          <h3 className="text-white font-bold text-lg">Aucun véhicule trouvé</h3>
+          <p className="text-white/40 text-sm max-w-md mx-auto">
+            Aucun modèle ne correspond à vos critères actuels.
           </p>
-          <button onClick={resetFilters} className="btn-primary text-sm px-6 py-2.5">
+          <button onClick={resetFilters} className="btn-primary text-sm px-6 py-2.5 mx-auto">
             Réinitialiser les filtres
           </button>
         </div>
