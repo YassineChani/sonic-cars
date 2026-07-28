@@ -47,10 +47,8 @@ export default async function CarDetailPage({ params }: { params: Promise<{ slug
 
   const allImages = [
     car.mainImage || "/placeholder-car.jpg",
-    ...car.images.map((img) => img.url),
+    ...(car.images || []).map((img: any) => img.url),
   ].filter(Boolean);
-
-  const price = Number(car.dailyPrice);
 
   return (
     <div className="pt-28 pb-20">
