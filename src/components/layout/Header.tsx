@@ -2,8 +2,20 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const PHONE_NUMBERS = [
+  { label: "06 61 38 26 53", value: "+212661382653" },
+  { label: "06 90 63 15 24", value: "+212690631524" },
+  { label: "06 64 63 71 71", value: "+212664637171" },
+];
+
+const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/soniccars2025",
+  snapchat: "https://www.snapchat.com/add/soniccars2025",
+  facebook: "https://www.facebook.com/Soniccars",
+};
 
 const navLinks = [
   { href: "/", label: "Accueil" },
@@ -26,6 +38,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [phoneDropdown, setPhoneDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -107,15 +120,39 @@ export function Header() {
               )}
             </nav>
 
-            {/* CTA */}
+            {/* CTA & Phones */}
             <div className="hidden lg:flex items-center gap-3">
-              <a
-                href="tel:+212600000000"
-                className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              {/* Phones Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setPhoneDropdown(true)}
+                onMouseLeave={() => setPhoneDropdown(false)}
               >
-                <Phone size={15} />
-                <span>+212 600 000 000</span>
-              </a>
+                <a
+                  href={`tel:${PHONE_NUMBERS[0].value}`}
+                  className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5 border border-white/10"
+                >
+                  <Phone size={15} className="text-red-500" />
+                  <span>{PHONE_NUMBERS[0].label}</span>
+                  <ChevronDown size={12} className="text-white/40" />
+                </a>
+
+                {phoneDropdown && (
+                  <div className="absolute top-full right-0 mt-1 w-52 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl py-2 overflow-hidden space-y-1">
+                    {PHONE_NUMBERS.map((p) => (
+                      <a
+                        key={p.value}
+                        href={`tel:${p.value}`}
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                      >
+                        <Phone size={13} className="text-red-500" />
+                        {p.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Link href="/reservation" className="btn-primary text-sm px-5 py-2.5">
                 Réserver
               </Link>
@@ -182,18 +219,24 @@ export function Header() {
               </div>
             ))}
           </nav>
+
+          {/* Mobile Footer with Phones */}
           <div className="px-6 py-6 border-t border-white/10 flex flex-col gap-3">
-            <a
-              href="tel:+212600000000"
-              className="flex items-center gap-2 text-sm text-white/60"
-            >
-              <Phone size={15} />
-              +212 600 000 000
-            </a>
+            <div className="text-xs text-white/40 uppercase font-semibold tracking-wider">Contact Téléphonique</div>
+            {PHONE_NUMBERS.map((p) => (
+              <a
+                key={p.value}
+                href={`tel:${p.value}`}
+                className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
+              >
+                <Phone size={14} className="text-red-500" />
+                {p.label}
+              </a>
+            ))}
             <Link
               href="/reservation"
               onClick={() => setIsMobileOpen(false)}
-              className="btn-primary w-full text-center"
+              className="btn-primary w-full text-center mt-2"
             >
               Réserver Maintenant
             </Link>
