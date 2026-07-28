@@ -8,7 +8,6 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const price = Number(car.dailyPrice);
   const imageUrl = car.mainImage || "/placeholder-car.jpg";
 
   return (
