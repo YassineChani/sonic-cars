@@ -6,6 +6,7 @@ import { Calendar, Clock, MapPin, Check, ArrowRight, Shield, User, Phone, Mail, 
 import { calculateDays, buildWhatsAppUrl } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
 import { CarWithDetails } from "@/types";
+import { MOROCCAN_CITIES } from "@/lib/constants";
 
 interface BookingWidgetProps {
   car: CarWithDetails;
@@ -89,16 +90,19 @@ export function BookingWidget({ car }: BookingWidgetProps) {
 
   if (successBooking) {
     const waMsg = `Bonjour SONIC CARS, je confirme ma réservation pour la ${car.brand} ${car.model} du ${pickupDate} (${pickupTime}) au ${returnDate} (${returnTime}). Nom: ${customerName}.`;
-    const waUrl = buildWhatsAppUrl("+212600000000", waMsg);
+    const waUrl = buildWhatsAppUrl("+212661382653", waMsg);
 
     return (
       <div className="glass border border-emerald-500/30 rounded-2xl p-6 text-center space-y-4">
-        <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-          <Check size={28} />
+        <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto ring-4 ring-emerald-500/20">
+          <Check size={32} />
         </div>
-        <h3 className="text-white font-bold text-xl" style={{ fontFamily: "var(--font-outfit)" }}>
-          Demande Enregistrée !
-        </h3>
+        <div>
+          <h3 className="text-white font-bold text-xl" style={{ fontFamily: "var(--font-outfit)" }}>
+            ✅ Réservation Enregistrée !
+          </h3>
+          <p className="text-emerald-400 text-xs mt-0.5 font-semibold">Référence : {successBooking.bookingRef}</p>
+        </div>
         <p className="text-white/70 text-sm">
           Véhicule : <span className="text-red-400 font-bold">{car.brand} {car.model}</span>
         </p>
@@ -111,9 +115,15 @@ export function BookingWidget({ car }: BookingWidgetProps) {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 justify-center text-sm"
+            className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 justify-center text-sm font-bold"
           >
             Confirmer sur WhatsApp
+          </a>
+          <a
+            href="/admin/bookings"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 text-xs font-semibold transition-all"
+          >
+            🔐 Voir dans l'Espace Admin
           </a>
           <button
             onClick={() => setSuccessBooking(null)}
@@ -151,10 +161,12 @@ export function BookingWidget({ car }: BookingWidgetProps) {
             <select
               value={pickupCity}
               onChange={(e) => setPickupCity(e.target.value)}
-              className="input-dark text-xs py-2"
+              className="input-dark text-xs py-2 bg-zinc-900 text-white"
+              style={{ colorScheme: "dark" }}
             >
-              <option value="Oujda">Oujda</option>
-              <option value="Tanger">Tanger</option>
+              {MOROCCAN_CITIES.map((city) => (
+                <option key={city} value={city} className="bg-zinc-900 text-white">{city}</option>
+              ))}
             </select>
           </div>
           <div>
@@ -164,10 +176,12 @@ export function BookingWidget({ car }: BookingWidgetProps) {
             <select
               value={returnCity}
               onChange={(e) => setReturnCity(e.target.value)}
-              className="input-dark text-xs py-2"
+              className="input-dark text-xs py-2 bg-zinc-900 text-white"
+              style={{ colorScheme: "dark" }}
             >
-              <option value="Oujda">Oujda</option>
-              <option value="Tanger">Tanger</option>
+              {MOROCCAN_CITIES.map((city) => (
+                <option key={city} value={city} className="bg-zinc-900 text-white">{city}</option>
+              ))}
             </select>
           </div>
         </div>

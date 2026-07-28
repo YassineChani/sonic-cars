@@ -31,7 +31,7 @@ export default async function FAQPage() {
   const faqs = await getFaqs();
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pt-36 md:pt-44 pb-20">
       <div className="container-custom max-w-4xl">
         {/* Header */}
         <div className="text-center mb-16">

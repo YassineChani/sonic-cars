@@ -51,7 +51,7 @@ export default async function CarDetailPage({ params }: { params: Promise<{ slug
   ].filter(Boolean);
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pt-36 md:pt-44 pb-20">
       <div className="container-custom">
         {/* Back Link */}
         <Link

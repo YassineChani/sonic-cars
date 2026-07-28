@@ -3,25 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MapPin, Calendar, Search } from "lucide-react";
+import { MOROCCAN_CITIES } from "@/lib/constants";
 
 export function SearchForm() {
   const router = useRouter();
-  const [form, setForm] = useState({
-    city: "",
-    pickupDate: "",
-    returnDate: "",
-  });
+  const [form, setForm] = useState({ city: "", pickupDate: "", returnDate: "" });
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (form.city) params.set("city", form.city);
+    if (form.city) params.set("city", form.city.toLowerCase());
     if (form.pickupDate) params.set("pickup", form.pickupDate);
     if (form.returnDate) params.set("return", form.returnDate);
     router.push(`/voitures?${params.toString()}`);
   }
 
-  // Min date = today
   const today = new Date().toISOString().split("T")[0];
 
   return (
@@ -32,35 +28,35 @@ export function SearchForm() {
             <h2 className="text-white font-bold text-xl" style={{ fontFamily: "var(--font-outfit)" }}>
               Trouvez votre voiture
             </h2>
-            <p className="text-white/40 text-sm mt-1">Recherchez parmi notre flotte disponible</p>
+            <p className="text-white/40 text-sm mt-1">Recherchez parmi notre flotte disponible à Oujda et Tanger</p>
           </div>
 
           <form onSubmit={handleSearch}>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {/* City */}
+              {/* Moroccan City Select */}
               <div className="relative">
-                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                  Ville
-                </label>
+                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">Ville</label>
                 <div className="relative">
-                  <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-red-500 pointer-events-none" />
+                  <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-red-500 pointer-events-none z-10" />
                   <select
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    className="input-dark pl-10 appearance-none cursor-pointer"
+                    className="input-dark pl-10 appearance-none cursor-pointer bg-zinc-900 text-white"
+                    style={{ colorScheme: "dark" }}
                   >
                     <option value="">Toutes les villes</option>
-                    <option value="oujda">Oujda</option>
-                    <option value="tanger">Tanger</option>
+                    {MOROCCAN_CITIES.map((city) => (
+                      <option key={city} value={city} className="bg-zinc-900 text-white py-1">
+                        {city}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
 
               {/* Pickup Date */}
               <div>
-                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                  Date de départ
-                </label>
+                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">Date de départ</label>
                 <div className="relative">
                   <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-red-500 pointer-events-none" />
                   <input
@@ -76,9 +72,7 @@ export function SearchForm() {
 
               {/* Return Date */}
               <div>
-                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                  Date de retour
-                </label>
+                <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">Date de retour</label>
                 <div className="relative">
                   <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-red-500 pointer-events-none" />
                   <input

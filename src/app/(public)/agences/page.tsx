@@ -26,7 +26,7 @@ export default async function AgencesPage() {
   const locations = await getLocations();
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pt-36 md:pt-44 pb-20">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">

@@ -8,6 +8,7 @@ import { calculateDays, buildWhatsAppUrl } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
 import { CarWithDetails } from "@/types";
 import { Location } from "@prisma/client";
+import { MOROCCAN_CITIES } from "@/lib/constants";
 
 interface PublicBookingFormProps {
   cars: CarWithDetails[];
@@ -103,19 +104,24 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
 
   if (successBooking) {
     const waMsg = `Bonjour SONIC CARS, je confirme ma réservation pour la ${selectedCar?.brand} ${selectedCar?.model} du ${pickupDate} à ${pickupTime} au ${returnDate} à ${returnTime}. Nom: ${customerName}, Tél: ${customerPhone}.`;
-    const waUrl = buildWhatsAppUrl("+212600000000", waMsg);
+    const waUrl = buildWhatsAppUrl("+212661382653", waMsg);
 
     return (
       <div className="glass border border-emerald-500/30 rounded-2xl p-8 text-center space-y-6 max-w-lg mx-auto">
-        <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-          <Check size={32} />
+        {/* Success Icon */}
+        <div className="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto ring-4 ring-emerald-500/20">
+          <Check size={40} />
         </div>
-        <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-outfit)" }}>
-          Demande Enregistrée avec Succès !
-        </h2>
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-outfit)" }}>
+            ✅ Réservation Enregistrée !
+          </h2>
+          <p className="text-emerald-400 text-sm font-semibold">Référence : {successBooking.bookingRef}</p>
+        </div>
+
         <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-left space-y-2">
           {selectedCar && (
-            <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-2">
+            <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3">
               <div className="relative w-16 h-12 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0">
                 <Image src={selectedCar.mainImage || "/placeholder-car.jpg"} alt={selectedCar.title} fill className="object-cover" />
               </div>
@@ -131,7 +137,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
           </div>
           <div className="flex justify-between text-xs text-white/60">
             <span>Retour :</span>
-            <span className="text-white font-medium">{returnCity} — {returnDate} à {returnTime}</span>
+            <span className="text-white font-medium">{returnCity || pickupCity} — {returnDate} à {returnTime}</span>
           </div>
           <div className="flex justify-between text-xs text-white/60">
             <span>Client :</span>
@@ -140,7 +146,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         <p className="text-white/60 text-sm">
-          Notre équipe va vérifier la disponibilité et vous recontacter par téléphone / WhatsApp sous 30 minutes.
+          Notre équipe va vérifier la disponibilité et vous recontacter par téléphone / WhatsApp sous <strong className="text-white">30 minutes</strong>.
         </p>
 
         <div className="space-y-3 pt-2">
@@ -148,9 +154,15 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 justify-center text-sm py-3"
+            className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 justify-center text-sm py-3 font-bold"
           >
             Confirmer sur WhatsApp
+          </a>
+          <a
+            href="/admin/bookings"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 text-sm font-semibold transition-all"
+          >
+            🔐 Voir dans l'Espace Admin
           </a>
           <button
             onClick={() => setSuccessBooking(null)}
@@ -241,12 +253,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
             <select
               value={pickupCity}
               onChange={(e) => setPickupCity(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3 bg-zinc-900 text-white"
+              style={{ colorScheme: "dark" }}
               required
             >
-              {locations.map((loc) => (
-                <option key={loc.id} value={loc.name}>
-                  {loc.name} (Agence / Aéroport)
+              {MOROCCAN_CITIES.map((city) => (
+                <option key={city} value={city} className="bg-zinc-900 text-white py-1">
+                  {city}
                 </option>
               ))}
             </select>
@@ -260,12 +273,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
             <select
               value={returnCity}
               onChange={(e) => setReturnCity(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3 bg-zinc-900 text-white"
+              style={{ colorScheme: "dark" }}
             >
-              <option value="">Même lieu que le départ</option>
-              {locations.map((loc) => (
-                <option key={loc.id} value={loc.name}>
-                  {loc.name} (Agence / Aéroport)
+              <option value="" className="bg-zinc-900 text-white">Même lieu que le départ</option>
+              {MOROCCAN_CITIES.map((city) => (
+                <option key={city} value={city} className="bg-zinc-900 text-white py-1">
+                  {city}
                 </option>
               ))}
             </select>

@@ -5,6 +5,12 @@ import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Check } from "lucide-r
 import { toast } from "@/components/ui/Toaster";
 import { buildWhatsAppUrl } from "@/lib/utils";
 
+const PHONE_NUMBERS = [
+  { label: "06 61 38 26 53", value: "+212661382653" },
+  { label: "06 90 63 15 24", value: "+212690631524" },
+  { label: "06 64 63 71 71", value: "+212664637171" },
+];
+
 export default function ContactPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +30,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pt-36 md:pt-44 pb-20">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -56,15 +62,21 @@ export default function ContactPage() {
               </h3>
 
               <div className="space-y-4 text-sm">
-                <div className="flex items-start gap-3">
-                  <Phone size={18} className="text-red-500 mt-1 shrink-0" />
-                  <div>
-                    <div className="text-white/40 text-xs">Téléphone / WhatsApp</div>
-                    <div className="text-white font-medium">+212 600 000 000</div>
-                  </div>
+                <div className="space-y-2">
+                  <div className="text-white/40 text-xs font-semibold uppercase tracking-wider">Téléphones Directs</div>
+                  {PHONE_NUMBERS.map((p) => (
+                    <a
+                      key={p.value}
+                      href={`tel:${p.value}`}
+                      className="flex items-center gap-2.5 text-white font-medium hover:text-red-400 transition-colors"
+                    >
+                      <Phone size={15} className="text-red-500 shrink-0" />
+                      <span>{p.label}</span>
+                    </a>
+                  ))}
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 border-t border-white/10 pt-3">
                   <Mail size={18} className="text-red-500 mt-1 shrink-0" />
                   <div>
                     <div className="text-white/40 text-xs">Email</div>
@@ -72,7 +84,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 border-t border-white/10 pt-3">
                   <Clock size={18} className="text-red-500 mt-1 shrink-0" />
                   <div>
                     <div className="text-white/40 text-xs">Horaires d'ouverture</div>
@@ -83,7 +95,7 @@ export default function ContactPage() {
 
               <div className="pt-2">
                 <a
-                  href={buildWhatsAppUrl("+212600000000", "Bonjour SONIC CARS, je souhaite vous contacter.")}
+                  href={buildWhatsAppUrl("+212661382653", "Bonjour SONIC CARS, je souhaite vous contacter.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 text-xs py-3 justify-center"
@@ -100,7 +112,7 @@ export default function ContactPage() {
                 <MapPin size={18} className="text-red-500 mt-0.5 shrink-0" />
                 <div>
                   <h4 className="text-white font-bold text-sm">Agence Oujda</h4>
-                  <p className="text-white/50 text-xs mt-0.5">123 Avenue Mohammed V, Center Ville</p>
+                  <p className="text-white/50 text-xs mt-0.5">123 Avenue Mohammed V, Centre Ville</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 pt-3 border-t border-white/5">
@@ -115,111 +127,109 @@ export default function ContactPage() {
 
           {/* Form Side */}
           <div className="lg:col-span-2">
-            <div className="glass border border-white/10 rounded-2xl p-6 md:p-8">
-              <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-outfit)" }}>
-                Envoyez-nous un Message
-              </h3>
-
-              {sent ? (
-                <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-                    <Check size={32} />
-                  </div>
-                  <h4 className="text-xl font-bold text-white">Message Envoyé !</h4>
-                  <p className="text-white/60 text-sm max-w-md mx-auto">
-                    Merci d'avoir réagi. Notre équipe traitera votre demande dans les plus brefs délais.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSent(false);
-                      setMessage("");
-                    }}
-                    className="btn-secondary text-xs px-6 py-2.5"
-                  >
-                    Envoyer un autre message
-                  </button>
+            {sent ? (
+              <div className="glass border border-emerald-500/30 rounded-2xl p-12 text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+                  <Check size={32} />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                        Nom complet *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Votre nom"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="input-dark text-sm"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                        Téléphone *
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="+212 6..."
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="input-dark text-sm"
-                        required
-                      />
-                    </div>
-                  </div>
+                <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-outfit)" }}>
+                  Message Envoyé avec Succès !
+                </h3>
+                <p className="text-white/60 text-sm max-w-md mx-auto">
+                  Merci de nous avoir contactés. Notre équipe commerciale vous répondra dans les plus brefs délais.
+                </p>
+                <button
+                  onClick={() => setSent(false)}
+                  className="btn-secondary text-xs px-6 py-2.5 mx-auto"
+                >
+                  Envoyer un autre message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="glass border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
+                <h3 className="text-white font-bold text-xl mb-4 border-b border-white/10 pb-3" style={{ fontFamily: "var(--font-outfit)" }}>
+                  Envoyez-nous un Message
+                </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="votre@email.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="input-dark text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                        Agence Concernée
-                      </label>
-                      <select
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="input-dark text-sm"
-                      >
-                        <option value="Oujda">Oujda</option>
-                        <option value="Tanger">Tanger</option>
-                        <option value="Les deux">Les deux</option>
-                      </select>
-                    </div>
-                  </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                      Message *
+                      Nom complet *
                     </label>
-                    <textarea
-                      rows={5}
-                      placeholder="Comment pouvons-nous vous aider ?"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                    <input
+                      type="text"
+                      placeholder="ex: Youssef El Amrani"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       className="input-dark text-sm"
                       required
                     />
                   </div>
 
-                  <button type="submit" className="btn-primary text-sm py-3.5 px-8">
-                    <Send size={16} />
-                    Envoyer le Message
-                  </button>
-                </form>
-              )}
-            </div>
+                  <div>
+                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                      Téléphone *
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="ex: 06 61 38 26 53"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="input-dark text-sm"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                      Email (optionnel)
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="votre@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="input-dark text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                      Agence Concerne
+                    </label>
+                    <select
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      className="input-dark text-sm"
+                    >
+                      <option value="Oujda">Agence Oujda</option>
+                      <option value="Tanger">Agence Tanger</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    rows={5}
+                    placeholder="Posez votre question ou détaillez votre demande de location..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="input-dark text-sm"
+                    required
+                  />
+                </div>
+
+                <button type="submit" className="btn-primary w-full justify-center text-sm py-3.5">
+                  <Send size={16} />
+                  Envoyer le Message
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
