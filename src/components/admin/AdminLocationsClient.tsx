@@ -107,7 +107,7 @@ export function AdminLocationsClient({ initialLocations }: { initialLocations: a
             <p className="text-white/60 text-sm">{loc.address || "Adresse non spécifiée"}</p>
 
             <div className="pt-2 space-y-1 text-xs text-white/50 border-t border-white/5">
-              <div>Tél: {loc.phone || "+212 600 000 000"}</div>
+              <div>Tél: {loc.phone || "+212 661 38 26 53"}</div>
               <div>Email: {loc.email || `${loc.slug}@soniccars.ma`}</div>
               <div className="text-red-400 font-semibold pt-1">
                 {loc._count?.cars || 0} véhicule(s) rattaché(s)

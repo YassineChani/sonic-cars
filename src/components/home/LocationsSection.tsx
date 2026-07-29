@@ -5,7 +5,7 @@ const locations = [
   {
     city: "Oujda",
     address: "123 Avenue Mohammed V, Center Ville, Oujda",
-    phone: "+212 600 000 000",
+    phone: "+212 661 38 26 53",
     email: "oujda@soniccars.ma",
     hours: "08:00 - 20:00 (7j/7)",
     description: "Service en centre-ville et livraison disponible à l'Aéroport Oujda Angads.",
@@ -14,7 +14,7 @@ const locations = [
   {
     city: "Tanger",
     address: "456 Boulevard Mohammed VI, Malabata, Tanger",
-    phone: "+212 600 000 000",
+    phone: "+212 664 63 71 71",
     email: "tanger@soniccars.ma",
     hours: "08:00 - 20:00 (7j/7)",
     description: "Service côte & centre-ville, livraison disponible à l'Aéroport Tanger Ibn Battouta.",

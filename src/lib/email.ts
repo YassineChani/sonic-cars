@@ -103,8 +103,8 @@ export async function sendBookingConfirmationEmail(booking: {
           </div>
           
           <p style="color: #666;">Pour toute question, n'hésitez pas à nous contacter :</p>
-          <p style="color: #666;">📞 <a href="tel:+212600000000" style="color: #ef4444;">+212 600 000 000</a></p>
-          <p style="color: #666;">💬 WhatsApp : <a href="https://wa.me/212600000000" style="color: #ef4444;">+212 600 000 000</a></p>
+          <p style="color: #666;">📞 <a href="tel:+212661382653" style="color: #ef4444;">+212661382653/a></p>
+          <p style="color: #666;">💬 WhatsApp : <a href="https://wa.me/212661382653" style="color: #ef4444;">+212661 382 653</a></p>
         </div>
         <div class="footer">
           <p>© ${new Date().getFullYear()} SONIC CARS — Tous droits réservés</p>

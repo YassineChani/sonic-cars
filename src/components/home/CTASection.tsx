@@ -29,7 +29,7 @@ export function CTASection() {
             </Link>
 
             <a
-              href="https://wa.me/212600000000"
+              href="https://wa.me/212661382653"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2"

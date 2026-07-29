@@ -5,9 +5,9 @@ import { Save, Phone, Mail, Globe, MessageCircle } from "lucide-react";
 import { toast } from "@/components/ui/Toaster";
 
 export function AdminSettingsClient({ initialSettings }: { initialSettings: Record<string, string> }) {
-  const [whatsapp, setWhatsapp] = useState(initialSettings.whatsapp || "+212600000000");
+  const [whatsapp, setWhatsapp] = useState(initialSettings.whatsapp || "+212661382653");
   const [contactEmail, setContactEmail] = useState(initialSettings.contactEmail || "contact@soniccars.ma");
-  const [contactPhone, setContactPhone] = useState(initialSettings.contactPhone || "+212600000000");
+  const [contactPhone, setContactPhone] = useState(initialSettings.contactPhone || "+212661382653");
 
   const [loading, setLoading] = useState(false);
 

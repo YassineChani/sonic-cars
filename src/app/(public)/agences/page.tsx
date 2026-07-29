@@ -9,8 +9,8 @@ export const metadata = {
 };
 
 const FALLBACK_LOCATIONS = [
-  { id: "1", name: "Agence Oujda", slug: "oujda", description: "Notre agence principale au cœur d'Oujda, à proximité de l'aéroport.", address: "Boulevard Mohammed VI, Oujda 60000", phone: "+212536700000", whatsapp: "+212600000000", email: "oujda@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
-  { id: "2", name: "Agence Tanger", slug: "tanger", description: "Notre agence à Tanger, idéalement située pour vos trajets vers le port et l'aéroport.", address: "Avenue Mohammed V, Tanger 90000", phone: "+212539000000", whatsapp: "+212600000000", email: "tanger@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+  { id: "1", name: "Agence Oujda", slug: "oujda", description: "Notre agence principale au cœur d'Oujda, à proximité de l'aéroport.", address: "Boulevard Mohammed VI, Oujda 60000", phone: "+212661382653", whatsapp: "+212661382653", email: "oujda@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+  { id: "2", name: "Agence Tanger", slug: "tanger", description: "Notre agence à Tanger, idéalement située pour vos trajets vers le port et l'aéroport.", address: "Avenue Mohammed V, Tanger 90000", phone: "+212664637171", whatsapp: "+212661382653", email: "tanger@soniccars.ma", mapEmbedUrl: null, image: null, createdAt: new Date(), updatedAt: new Date() },
 ];
 
 async function getLocations() {
@@ -78,7 +78,7 @@ export default async function AgencesPage() {
                 </div>
                 <div className="flex items-center gap-3 text-white/80 text-sm">
                   <Phone size={18} className="text-red-500 shrink-0" />
-                  <span>{loc.phone || "+212 600 000 000"}</span>
+                  <span>{loc.phone || "+212 661 38 26 53"}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white/80 text-sm">
                   <Mail size={18} className="text-red-500 shrink-0" />
@@ -113,7 +113,7 @@ export default async function AgencesPage() {
             Nous livrons gratuitement votre voiture à l'Aéroport Oujda Angads et à l'Aéroport Tanger Ibn Battouta pour tout contrat de location supérieur à 3 jours.
           </p>
           <a
-            href="https://wa.me/212600000000"
+            href="https://wa.me/212661382653"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-red-400 font-semibold hover:text-red-300 text-sm"
