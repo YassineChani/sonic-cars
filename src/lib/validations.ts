@@ -4,16 +4,16 @@ import { z } from "zod";
 export const bookingSchema = z.object({
   carId: z.string().min(1, "Veuillez sélectionner un véhicule"),
   fullName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  phone: z.string().min(8, "Numéro de téléphone invalide"),
-  whatsapp: z.string().optional(),
-  email: z.string().email("Adresse email invalide"),
+  phone: z.string().min(6, "Numéro de téléphone invalide"),
+  whatsapp: z.string().optional().nullable(),
+  email: z.string().optional().nullable(),
   pickupCity: z.string().min(1, "Veuillez sélectionner une ville de départ"),
-  returnCity: z.string().min(1, "Veuillez sélectionner une ville de retour"),
+  returnCity: z.string().optional().nullable(),
   pickupDate: z.string().min(1, "Veuillez sélectionner une date de départ"),
-  pickupTime: z.string().min(1, "Veuillez sélectionner une heure de départ"),
+  pickupTime: z.string().optional().nullable(),
   returnDate: z.string().min(1, "Veuillez sélectionner une date de retour"),
-  returnTime: z.string().min(1, "Veuillez sélectionner une heure de retour"),
-  message: z.string().optional(),
+  returnTime: z.string().optional().nullable(),
+  message: z.string().optional().nullable(),
 });
 
 export type BookingFormData = z.infer<typeof bookingSchema>;
