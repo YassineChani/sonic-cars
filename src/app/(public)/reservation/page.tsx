@@ -3,8 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { PublicBookingForm } from "@/components/booking/PublicBookingForm";
 
 export const metadata = {
-  title: "Réserver une Voiture — SONIC CARS",
-  description: "Réservez votre voiture de location à Oujda ou Tanger en quelques clics.",
+  title: "Réserver une Voiture — SONIC CARS Premium",
+  description: "Réservez votre voiture de location de luxe à Oujda ou Tanger sans aucun paiement en ligne.",
 };
 
 export default async function BookingPage() {
@@ -26,27 +26,30 @@ export default async function BookingPage() {
   }
 
   return (
-    <div className="pt-28 md:pt-36 pb-28">
-      <div className="container-custom max-w-4xl">
-        <div className="text-center mt-6 md:mt-10 mb-16 space-y-4">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="divider-red" />
-            <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
-              Réservation Rapide
+    <div className="pt-32 md:pt-44 pb-32">
+      <div className="container-custom max-w-5xl">
+        {/* Header Title Section */}
+        <div className="text-center mt-8 md:mt-14 mb-16 md:mb-24 space-y-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-red-400 text-xs font-bold uppercase tracking-widest">
+              Réservation Rapide & Sans Acompte
             </span>
-            <div className="divider-red" />
           </div>
+
           <h1
-            className="text-4xl md:text-5xl font-black text-white"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
-            Réservez Votre <span className="text-red-500">Voiture</span>
+            Réservez Votre <span className="text-red-500">Véhicule</span>
           </h1>
-          <p className="text-white/50 text-base max-w-lg mx-auto leading-relaxed">
-            Remplissez le formulaire ci-dessous. Notre équipe vous contactera pour valider votre demande sans aucun paiement en ligne.
+
+          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Profitez de nos tarifs exclusifs et d'un service de livraison sur-mesure à Oujda, Tanger et dans tout le Maroc.
           </p>
         </div>
 
+        {/* Public Booking Form */}
         <PublicBookingForm cars={cars as any} locations={locations} />
       </div>
     </div>
