@@ -183,7 +183,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-12 max-w-5xl mx-auto">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-16 max-w-5xl mx-auto">
       
       {/* ─── ÉTAPE 01: Sélection du Véhicule ─────────────────────────────── */}
       <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
