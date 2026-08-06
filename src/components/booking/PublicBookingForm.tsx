@@ -183,9 +183,10 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-16 max-w-5xl mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
       
       {/* ─── ÉTAPE 01: Sélection du Véhicule ─────────────────────────────── */}
+      {/* ─── ÉTAPE 01 Card ─── */}
       <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
         <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-4">
@@ -260,6 +261,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
       </div>
 
       {/* ─── ÉTAPE 02: Lieux et Dates ───────────────────────────────────── */}
+      {/* ─── ÉTAPE 02 Card ─── */}
       <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
         <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-4">
