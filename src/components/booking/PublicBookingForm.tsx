@@ -183,12 +183,11 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
+    <form onSubmit={handleSubmit} className="booking-form-container">
       
       {/* ─── ÉTAPE 01: Sélection du Véhicule ─────────────────────────────── */}
-      {/* ─── ÉTAPE 01 Card ─── */}
-      <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
-        <div className="flex items-center justify-between pb-6 border-b border-white/10">
+      <div className="booking-step-card">
+        <div className="booking-step-header">
           <div className="flex items-center gap-4">
             <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-red-500/20 text-red-400 font-black text-sm border border-red-500/30">
               01
@@ -204,18 +203,14 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         {/* Cars Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="booking-field-grid grid-cols-1 grid-cols-sm-2 grid-cols-lg-3">
           {cars.map((car) => {
             const isSelected = car.id === selectedCarId;
             return (
               <div
                 key={car.id}
                 onClick={() => setSelectedCarId(car.id)}
-                className={`p-5 rounded-2xl border cursor-pointer transition-all duration-300 flex items-center gap-4 ${
-                  isSelected
-                    ? "border-red-500 bg-red-500/10 shadow-2xl ring-2 ring-red-500/40 scale-[1.02]"
-                    : "border-white/10 bg-white/4 hover:border-white/30 hover:bg-white/6"
-                }`}
+                className={`booking-car-card ${isSelected ? 'selected' : ''}`}
               >
                 <div className="relative w-22 h-16 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/10">
                   <Image
@@ -225,7 +220,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex-1 min-w-0 space-y-1.5">
+                <div className="flex-1 min-w-0 space-y-1">
                   <h4 className="text-white font-bold text-sm truncate">{car.brand} {car.model}</h4>
                   <p className="text-white/40 text-xs truncate">{car.year} · {car.transmission}</p>
                   <span className="inline-block text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -261,9 +256,8 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
       </div>
 
       {/* ─── ÉTAPE 02: Lieux et Dates ───────────────────────────────────── */}
-      {/* ─── ÉTAPE 02 Card ─── */}
-      <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
-        <div className="flex items-center justify-between pb-6 border-b border-white/10">
+      <div className="booking-step-card">
+        <div className="booking-step-header">
           <div className="flex items-center gap-4">
             <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-red-500/20 text-red-400 font-black text-sm border border-red-500/30">
               02
@@ -279,16 +273,16 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         {/* Cities Selector */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+        <div className="booking-field-grid grid-cols-1 grid-cols-sm-2">
+          <div className="booking-field-group">
+            <label>
               <MapPin size={15} className="text-red-500" />
               Lieu de Prise en Charge *
             </label>
             <select
               value={pickupCity}
               onChange={(e) => setPickupCity(e.target.value)}
-              className="input-dark text-sm py-4 px-5 bg-zinc-900 text-white rounded-2xl border-white/15 focus:border-red-500"
+              className="booking-input-premium"
               style={{ colorScheme: "dark" }}
               required
             >
@@ -300,15 +294,15 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
             </select>
           </div>
 
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <div className="booking-field-group">
+            <label>
               <MapPin size={15} className="text-white/40" />
               Lieu de Restitution (Optionnel)
             </label>
             <select
               value={returnCity}
               onChange={(e) => setReturnCity(e.target.value)}
-              className="input-dark text-sm py-4 px-5 bg-zinc-900 text-white rounded-2xl border-white/15 focus:border-red-500"
+              className="booking-input-premium"
               style={{ colorScheme: "dark" }}
             >
               <option value="" className="bg-zinc-900 text-white">Même lieu que le départ</option>
@@ -322,11 +316,11 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         {/* Departure & Return Dates & Times */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+        <div className="booking-field-grid grid-cols-1 grid-cols-sm-2">
           {/* Departure */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2 space-y-3">
-              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            <div className="col-span-2 booking-field-group">
+              <label>
                 <Calendar size={15} className="text-red-500" />
                 Date de Départ *
               </label>
@@ -335,13 +329,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 min={today}
                 value={pickupDate}
                 onChange={(e) => setPickupDate(e.target.value)}
-                className="input-dark text-sm py-4 px-5 cursor-pointer rounded-2xl border-white/15"
+                className="booking-input-premium cursor-pointer"
                 style={{ colorScheme: "dark" }}
                 required
               />
             </div>
-            <div className="space-y-3">
-              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            <div className="booking-field-group">
+              <label>
                 <Clock size={15} className="text-red-500" />
                 Heure *
               </label>
@@ -349,7 +343,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 type="time"
                 value={pickupTime}
                 onChange={(e) => setPickupTime(e.target.value)}
-                className="input-dark text-sm py-4 px-3 cursor-pointer rounded-2xl border-white/15"
+                className="booking-input-premium cursor-pointer"
                 style={{ colorScheme: "dark" }}
                 required
               />
@@ -358,8 +352,8 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
 
           {/* Return */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2 space-y-3">
-              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            <div className="col-span-2 booking-field-group">
+              <label>
                 <Calendar size={15} className="text-red-500" />
                 Date de Retour *
               </label>
@@ -368,13 +362,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 min={pickupDate || today}
                 value={returnDate}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="input-dark text-sm py-4 px-5 cursor-pointer rounded-2xl border-white/15"
+                className="booking-input-premium cursor-pointer"
                 style={{ colorScheme: "dark" }}
                 required
               />
             </div>
-            <div className="space-y-3">
-              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            <div className="booking-field-group">
+              <label>
                 <Clock size={15} className="text-red-500" />
                 Heure *
               </label>
@@ -382,7 +376,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 type="time"
                 value={returnTime}
                 onChange={(e) => setReturnTime(e.target.value)}
-                className="input-dark text-sm py-4 px-3 cursor-pointer rounded-2xl border-white/15"
+                className="booking-input-premium cursor-pointer"
                 style={{ colorScheme: "dark" }}
                 required
               />
@@ -392,8 +386,8 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
       </div>
 
       {/* ─── ÉTAPE 03: Coordonnées du Conducteur ────────────────────────── */}
-      <div className="glass border border-white/10 rounded-3xl p-6 md:p-10 space-y-8 shadow-2xl">
-        <div className="flex items-center justify-between pb-6 border-b border-white/10">
+      <div className="booking-step-card">
+        <div className="booking-step-header">
           <div className="flex items-center gap-4">
             <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-red-500/20 text-red-400 font-black text-sm border border-red-500/30">
               03
@@ -409,9 +403,9 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         {/* Contact Information Fields */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+        <div className="booking-field-grid grid-cols-1 grid-cols-sm-3">
+          <div className="booking-field-group">
+            <label>
               <User size={15} className="text-red-500" />
               Nom Complet *
             </label>
@@ -420,13 +414,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: Youssef Benjelloun"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="input-dark text-sm py-4 px-5 rounded-2xl border-white/15"
+              className="booking-input-premium"
               required
             />
           </div>
 
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <div className="booking-field-group">
+            <label>
               <Phone size={15} className="text-red-500" />
               Téléphone (WhatsApp) *
             </label>
@@ -435,13 +429,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: +212 6 12 34 56 78"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="input-dark text-sm py-4 px-5 rounded-2xl border-white/15"
+              className="booking-input-premium"
               required
             />
           </div>
 
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <div className="booking-field-group">
+            <label>
               <Mail size={15} className="text-white/40" />
               Email (Optionnel)
             </label>
@@ -450,15 +444,15 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="votre@email.com"
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              className="input-dark text-sm py-4 px-5 rounded-2xl border-white/15"
+              className="booking-input-premium"
             />
           </div>
         </div>
 
         {/* Additional Optional Fields */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-2">
-          <div className="space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+        <div className="booking-field-grid grid-cols-1 grid-cols-sm-3">
+          <div className="booking-field-group">
+            <label>
               <CarIcon size={15} className="text-white/40" />
               Âge du Conducteur (Optionnel)
             </label>
@@ -469,12 +463,12 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: 28"
               value={driverAge}
               onChange={(e) => setDriverAge(e.target.value)}
-              className="input-dark text-sm py-4 px-5 rounded-2xl border-white/15"
+              className="booking-input-premium"
             />
           </div>
 
-          <div className="md:col-span-2 space-y-3">
-            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <div className="col-span-2 booking-field-group">
+            <label>
               <MessageSquare size={15} className="text-white/40" />
               Message / Demandes Spéciales (Optionnel)
             </label>
@@ -483,7 +477,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: Siège bébé, livraison à l'aéroport ou hôtel..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="input-dark text-sm py-4 px-5 rounded-2xl border-white/15"
+              className="booking-input-premium"
             />
           </div>
         </div>
