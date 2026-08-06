@@ -8,10 +8,10 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="pt-28 pb-20">
+    <div className="pt-28 md:pt-36 pb-20">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mt-6 md:mt-10 mb-16">
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">

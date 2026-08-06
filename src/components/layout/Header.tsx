@@ -50,10 +50,8 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-black/95 backdrop-blur-md border-b border-white/8 shadow-2xl"
-            : "bg-transparent"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/95 backdrop-blur-md border-b border-white/10 shadow-2xl",
+          isScrolled && "bg-black border-white/15"
         )}
       >
         <div className="container-custom">

@@ -26,9 +26,9 @@ export default async function BookingPage() {
   }
 
   return (
-    <div className="pt-36 md:pt-48 pb-28">
+    <div className="pt-28 md:pt-36 pb-28">
       <div className="container-custom max-w-4xl">
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mt-6 md:mt-10 mb-16 space-y-4">
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">

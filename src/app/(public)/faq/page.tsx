@@ -31,10 +31,10 @@ export default async function FAQPage() {
   const faqs = await getFaqs();
 
   return (
-    <div className="pt-36 md:pt-44 pb-20">
+    <div className="pt-28 md:pt-36 pb-20">
       <div className="container-custom max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mt-6 md:mt-10 mb-16">
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">

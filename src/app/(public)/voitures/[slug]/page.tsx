@@ -51,12 +51,12 @@ export default async function CarDetailPage({ params }: { params: Promise<{ slug
   ].filter(Boolean);
 
   return (
-    <div className="pt-36 md:pt-44 pb-20">
+    <div className="pt-28 md:pt-36 pb-20">
       <div className="container-custom">
         {/* Back Link */}
         <Link
           href="/voitures"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mt-6 md:mt-10 mb-8 transition-colors"
         >
           <ArrowLeft size={16} />
           Retour à la flotte

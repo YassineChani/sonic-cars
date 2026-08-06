@@ -46,10 +46,10 @@ export default async function FleetPage() {
   const [cars, locations] = await Promise.all([getCars(), getLocations()]);
 
   return (
-    <div className="pt-36 md:pt-44 pb-20">
+    <div className="pt-28 md:pt-36 pb-20">
       <div className="container-custom">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mt-6 md:mt-10 mb-12">
           <div className="flex items-center gap-3 mb-3">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
