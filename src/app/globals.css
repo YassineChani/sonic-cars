@@ -331,17 +331,26 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Section Styles ─────────────────────────────────────────── */
 .section-padding {
-  padding: 100px 0;
+  padding: 120px 0;
 }
 
 .section-padding-sm {
-  padding: 60px 0;
+  padding: 80px 0;
 }
 
 .container-custom {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
+}
+
+/* ─── Spacing Utilities ──────────────────────────────────────── */
+.section-gap > * + * {
+  margin-top: 2rem;
+}
+
+.section-gap-lg > * + * {
+  margin-top: 3rem;
 }
 
 /* ─── Divider ────────────────────────────────────────────────── */
@@ -463,11 +472,15 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .section-padding {
-    padding: 60px 0;
+    padding: 72px 0;
+  }
+
+  .section-padding-sm {
+    padding: 48px 0;
   }
   
   .container-custom {
-    padding: 0 16px;
+    padding: 0 20px;
   }
   
   .whatsapp-float {
