@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
         toast("Identifiants incorrects", "error");
       } else {
         toast("Connexion réussie !", "success");
-        router.push("/admin/dashboard");
+        router.push("/admin/bookings");
         router.refresh();
       }
     } catch (err) {

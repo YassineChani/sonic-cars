@@ -19,10 +19,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
   const searchParams = useSearchParams();
   const today = new Date().toISOString().split("T")[0];
 
-  const initialCarId = searchParams.get("carId") || (cars[0]?.id || "");
+  const validInitialCar = cars.some(c => c.id === searchParams.get("carId")) 
+    ? searchParams.get("carId") 
+    : (cars[0]?.id || "");
+    
   const initialCity = searchParams.get("city") || "";
 
-  const [selectedCarId, setSelectedCarId] = useState(initialCarId);
+  const [selectedCarId, setSelectedCarId] = useState(validInitialCar || "");
   const [pickupCity, setPickupCity] = useState(initialCity || locations[0]?.name || "Oujda");
   const [returnCity, setReturnCity] = useState(initialCity || locations[0]?.name || "Oujda");
   const [pickupDate, setPickupDate] = useState(searchParams.get("pickup") || "");
@@ -97,6 +100,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
       }
 
       setSuccessBooking(data);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       toast("Votre demande de réservation a été soumise avec succès !", "success");
     } catch (err: any) {
       toast(err.message || "Erreur lors de la soumission", "error");
@@ -203,34 +207,42 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         {/* Cars Grid */}
-        <div className="booking-field-grid grid-cols-1 grid-cols-sm-2 grid-cols-lg-3">
-          {cars.map((car) => {
-            const isSelected = car.id === selectedCarId;
-            return (
-              <div
-                key={car.id}
-                onClick={() => setSelectedCarId(car.id)}
-                className={`booking-car-card ${isSelected ? 'selected' : ''}`}
-              >
-                <div className="relative w-22 h-16 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/10">
-                  <Image
-                    src={car.mainImage || "/placeholder-car.jpg"}
-                    alt={car.title}
-                    fill
-                    className="object-cover"
-                  />
+        {cars.length === 0 ? (
+          <div className="p-10 text-center bg-white/5 rounded-2xl border border-white/10">
+            <CarIcon size={40} className="mx-auto text-white/20 mb-4" />
+            <p className="text-white/60 text-sm">Aucun véhicule n'est disponible pour le moment.</p>
+            <p className="text-white/40 text-xs mt-2">Veuillez ajouter des véhicules depuis l'espace administration.</p>
+          </div>
+        ) : (
+          <div className="booking-field-grid grid-cols-1 grid-cols-sm-2 grid-cols-lg-3">
+            {cars.map((car) => {
+              const isSelected = car.id === selectedCarId;
+              return (
+                <div
+                  key={car.id}
+                  onClick={() => setSelectedCarId(car.id)}
+                  className={`booking-car-card ${isSelected ? 'selected' : ''}`}
+                >
+                  <div className="relative w-22 h-16 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/10">
+                    <Image
+                      src={car.mainImage || "/placeholder-car.jpg"}
+                      alt={car.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <h4 className="text-white font-bold text-sm truncate">{car.brand} {car.model}</h4>
+                    <p className="text-white/40 text-xs truncate">{car.year} · {car.transmission}</p>
+                    <span className="inline-block text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                      Disponible
+                    </span>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0 space-y-1">
-                  <h4 className="text-white font-bold text-sm truncate">{car.brand} {car.model}</h4>
-                  <p className="text-white/40 text-xs truncate">{car.year} · {car.transmission}</p>
-                  <span className="inline-block text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                    Disponible
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Selected Car Display Banner */}
         {selectedCar && (
