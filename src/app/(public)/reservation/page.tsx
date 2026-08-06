@@ -26,10 +26,10 @@ export default async function BookingPage() {
   }
 
   return (
-    <div className="pt-36 md:pt-44 pb-20">
+    <div className="pt-36 md:pt-48 pb-28">
       <div className="container-custom max-w-4xl">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-3">
+        <div className="text-center mb-16 space-y-4">
+          <div className="flex items-center justify-center gap-3 mb-2">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
               Réservation Rapide
@@ -37,12 +37,12 @@ export default async function BookingPage() {
             <div className="divider-red" />
           </div>
           <h1
-            className="text-4xl md:text-5xl font-black text-white mb-4"
+            className="text-4xl md:text-5xl font-black text-white"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Réservez Votre <span className="text-red-500">Voiture</span>
           </h1>
-          <p className="text-white/50 text-base max-w-lg mx-auto">
+          <p className="text-white/50 text-base max-w-lg mx-auto leading-relaxed">
             Remplissez le formulaire ci-dessous. Notre équipe vous contactera pour valider votre demande sans aucun paiement en ligne.
           </p>
         </div>

@@ -179,29 +179,29 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass border border-white/10 rounded-2xl p-6 md:p-8 space-y-8 max-w-4xl mx-auto shadow-2xl">
+    <form onSubmit={handleSubmit} className="glass border border-white/10 rounded-3xl p-8 md:p-12 space-y-12 max-w-4xl mx-auto shadow-2xl">
       
       {/* 1. Sélection de Voiture (Nom + Image) */}
-      <div>
-        <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
-          <CarIcon size={20} className="text-red-500" />
+      <div className="space-y-6">
+        <h3 className="text-white font-bold text-xl flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
+          <CarIcon size={22} className="text-red-500" />
           1. 🚗 Voiture sélectionnée
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {cars.map((car) => {
             const isSelected = car.id === selectedCarId;
             return (
               <div
                 key={car.id}
                 onClick={() => setSelectedCarId(car.id)}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3 ${
+                className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-center gap-4 ${
                   isSelected
-                    ? "border-red-500 bg-red-500/10 shadow-lg ring-1 ring-red-500/50"
-                    : "border-white/10 bg-white/4 hover:border-white/30"
+                    ? "border-red-500 bg-red-500/10 shadow-xl ring-2 ring-red-500/40 scale-[1.02]"
+                    : "border-white/10 bg-white/4 hover:border-white/30 hover:bg-white/6"
                 }`}
               >
-                <div className="relative w-20 h-16 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0">
+                <div className="relative w-20 h-16 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0">
                   <Image
                     src={car.mainImage || "/placeholder-car.jpg"}
                     alt={car.title}
@@ -209,10 +209,10 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 space-y-1">
                   <h4 className="text-white font-bold text-sm truncate">{car.brand} {car.model}</h4>
                   <p className="text-white/40 text-xs truncate">{car.year} · {car.transmission}</p>
-                  <span className="inline-block mt-1 text-[10px] text-emerald-400 font-semibold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                  <span className="inline-block text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                     Disponible
                   </span>
                 </div>
@@ -223,40 +223,40 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
 
         {/* Selected Car Display Banner */}
         {selectedCar && (
-          <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-red-500/10 via-zinc-900 to-zinc-900 border border-red-500/30 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="relative w-24 h-16 rounded-lg overflow-hidden bg-zinc-800 border border-white/10">
+          <div className="mt-6 p-5 rounded-2xl bg-gradient-to-r from-red-500/15 via-zinc-900 to-zinc-900 border border-red-500/30 flex items-center justify-between shadow-lg">
+            <div className="flex items-center gap-5">
+              <div className="relative w-24 h-16 rounded-xl overflow-hidden bg-zinc-800 border border-white/10 flex-shrink-0">
                 <Image src={selectedCar.mainImage || "/placeholder-car.jpg"} alt={selectedCar.title} fill className="object-cover" />
               </div>
-              <div>
+              <div className="space-y-1">
                 <div className="text-xs text-red-400 font-semibold uppercase tracking-wider">Véhicule Choisi</div>
                 <div className="text-white font-black text-lg">{selectedCar.brand} {selectedCar.model} ({selectedCar.year})</div>
                 <div className="text-white/50 text-xs">{selectedCar.transmission} · {selectedCar.fuelType} · {selectedCar.seats} Places</div>
               </div>
             </div>
-            <Check size={24} className="text-emerald-400 hidden sm:block" />
+            <Check size={28} className="text-emerald-400 hidden sm:block mr-2" />
           </div>
         )}
       </div>
 
       {/* 2. Dates et Heures et Lieux */}
-      <div className="border-t border-white/10 pt-6 space-y-5">
-        <h3 className="text-white font-bold text-lg flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
-          <Calendar size={20} className="text-red-500" />
+      <div className="border-t border-white/10 pt-10 space-y-8">
+        <h3 className="text-white font-bold text-xl flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
+          <Calendar size={22} className="text-red-500" />
           2. 📍 Lieux & Dates de Location
         </h3>
 
         {/* Lieux */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <MapPin size={14} className="text-red-500" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <MapPin size={15} className="text-red-500" />
               Lieu de prise en charge *
             </label>
             <select
               value={pickupCity}
               onChange={(e) => setPickupCity(e.target.value)}
-              className="input-dark text-sm py-3 bg-zinc-900 text-white"
+              className="input-dark text-sm py-3.5 px-4 bg-zinc-900 text-white rounded-xl"
               style={{ colorScheme: "dark" }}
               required
             >
@@ -268,15 +268,15 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
             </select>
           </div>
 
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <MapPin size={14} className="text-white/40" />
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <MapPin size={15} className="text-white/40" />
               Lieu de retour (optionnel)
             </label>
             <select
               value={returnCity}
               onChange={(e) => setReturnCity(e.target.value)}
-              className="input-dark text-sm py-3 bg-zinc-900 text-white"
+              className="input-dark text-sm py-3.5 px-4 bg-zinc-900 text-white rounded-xl"
               style={{ colorScheme: "dark" }}
             >
               <option value="" className="bg-zinc-900 text-white">Même lieu que le départ</option>
@@ -289,12 +289,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
           </div>
         </div>
 
-        {/* Départ: Date & Heure */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="grid grid-cols-3 gap-2">
-            <div className="col-span-2">
-              <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <Calendar size={14} className="text-red-500" />
+        {/* Départ et Retour Dates & Heures */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Départ: Date & Heure */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="col-span-2 space-y-2">
+              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+                <Calendar size={15} className="text-red-500" />
                 Date de départ *
               </label>
               <input
@@ -302,21 +303,21 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 min={today}
                 value={pickupDate}
                 onChange={(e) => setPickupDate(e.target.value)}
-                className="input-dark text-sm py-3 cursor-pointer"
+                className="input-dark text-sm py-3.5 px-4 cursor-pointer rounded-xl"
                 style={{ colorScheme: "dark" }}
                 required
               />
             </div>
-            <div>
-              <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <Clock size={14} className="text-red-500" />
+            <div className="space-y-2">
+              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+                <Clock size={15} className="text-red-500" />
                 Heure *
               </label>
               <input
                 type="time"
                 value={pickupTime}
                 onChange={(e) => setPickupTime(e.target.value)}
-                className="input-dark text-sm py-3 cursor-pointer"
+                className="input-dark text-sm py-3.5 px-3 cursor-pointer rounded-xl"
                 style={{ colorScheme: "dark" }}
                 required
               />
@@ -324,10 +325,10 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
           </div>
 
           {/* Retour: Date & Heure */}
-          <div className="grid grid-cols-3 gap-2">
-            <div className="col-span-2">
-              <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <Calendar size={14} className="text-red-500" />
+          <div className="grid grid-cols-3 gap-3">
+            <div className="col-span-2 space-y-2">
+              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+                <Calendar size={15} className="text-red-500" />
                 Date de retour *
               </label>
               <input
@@ -335,21 +336,21 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
                 min={pickupDate || today}
                 value={returnDate}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="input-dark text-sm py-3 cursor-pointer"
+                className="input-dark text-sm py-3.5 px-4 cursor-pointer rounded-xl"
                 style={{ colorScheme: "dark" }}
                 required
               />
             </div>
-            <div>
-              <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <Clock size={14} className="text-red-500" />
+            <div className="space-y-2">
+              <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+                <Clock size={15} className="text-red-500" />
                 Heure *
               </label>
               <input
                 type="time"
                 value={returnTime}
                 onChange={(e) => setReturnTime(e.target.value)}
-                className="input-dark text-sm py-3 cursor-pointer"
+                className="input-dark text-sm py-3.5 px-3 cursor-pointer rounded-xl"
                 style={{ colorScheme: "dark" }}
                 required
               />
@@ -359,16 +360,16 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
       </div>
 
       {/* 3. Coordonnées & Informations personnelles */}
-      <div className="border-t border-white/10 pt-6 space-y-4">
-        <h3 className="text-white font-bold text-lg flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
-          <User size={20} className="text-red-500" />
+      <div className="border-t border-white/10 pt-10 space-y-8">
+        <h3 className="text-white font-bold text-xl flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
+          <User size={22} className="text-red-500" />
           3. 👤 Coordonnées du Conducteur
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <User size={14} className="text-red-500" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <User size={15} className="text-red-500" />
               Nom complet *
             </label>
             <input
@@ -376,14 +377,14 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: Youssef Benjelloun"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3.5 px-4 rounded-xl"
               required
             />
           </div>
 
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Phone size={14} className="text-red-500" />
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <Phone size={15} className="text-red-500" />
               Téléphone (WhatsApp) *
             </label>
             <input
@@ -391,14 +392,14 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: +212 6 12 34 56 78"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3.5 px-4 rounded-xl"
               required
             />
           </div>
 
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Mail size={14} className="text-white/40" />
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <Mail size={15} className="text-white/40" />
               Email
             </label>
             <input
@@ -406,15 +407,15 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="votre@email.com"
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3.5 px-4 rounded-xl"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <CarIcon size={14} className="text-white/40" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <CarIcon size={15} className="text-white/40" />
               Âge du conducteur (optionnel)
             </label>
             <input
@@ -424,13 +425,13 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: 28"
               value={driverAge}
               onChange={(e) => setDriverAge(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3.5 px-4 rounded-xl"
             />
           </div>
 
-          <div className="md:col-span-2">
-            <label className="block text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <MessageSquare size={14} className="text-white/40" />
+          <div className="md:col-span-2 space-y-2">
+            <label className="block text-white/80 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+              <MessageSquare size={15} className="text-white/40" />
               Message / Demandes spéciales (optionnel)
             </label>
             <input
@@ -438,7 +439,7 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
               placeholder="ex: Siège bébé, livraison à l'hôtel..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="input-dark text-sm py-3"
+              className="input-dark text-sm py-3.5 px-4 rounded-xl"
             />
           </div>
         </div>
@@ -446,41 +447,43 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
 
       {/* Résumé de durée */}
       {days > 0 && (
-        <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <div className="flex items-center gap-3">
-            <Calendar className="text-red-500" size={20} />
-            <div>
-              <div className="text-white font-bold text-sm">Durée totale : {days} Jour(s)</div>
-              <div className="text-white/40 text-xs">Du {pickupDate} ({pickupTime}) au {returnDate} ({returnTime})</div>
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-4">
+            <Calendar className="text-red-500 shrink-0" size={24} />
+            <div className="space-y-0.5">
+              <div className="text-white font-bold text-base">Durée totale : {days} Jour(s)</div>
+              <div className="text-white/50 text-xs">Du {pickupDate} ({pickupTime}) au {returnDate} ({returnTime})</div>
             </div>
           </div>
-          <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center gap-1">
-            <Shield size={13} />
+          <span className="px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center gap-1.5 shrink-0">
+            <Shield size={14} />
             Assurance & Kilométrage Illimité Inclus
           </span>
         </div>
       )}
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="btn-primary w-full justify-center text-base py-4 font-bold shadow-xl hover:shadow-red-500/20"
-      >
-        {loading ? (
-          <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
-        ) : (
-          <>
-            Confirmer la Réservation
-            <ArrowRight size={18} />
-          </>
-        )}
-      </button>
+      {/* Submit Section */}
+      <div className="space-y-4 pt-4">
+        <button
+          type="submit"
+          disabled={loading}
+          className="btn-primary w-full justify-center text-base py-4 font-bold shadow-xl hover:shadow-red-500/20 rounded-xl"
+        >
+          {loading ? (
+            <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
+          ) : (
+            <>
+              Confirmer la Réservation
+              <ArrowRight size={18} />
+            </>
+          )}
+        </button>
 
-      <p className="text-white/30 text-xs text-center flex items-center justify-center gap-1">
-        <Shield size={14} className="text-red-500" />
-        Réservation rapide sans paiement par carte en ligne
-      </p>
+        <p className="text-white/40 text-xs text-center flex items-center justify-center gap-1.5">
+          <Shield size={14} className="text-red-500" />
+          Réservation rapide sans paiement par carte en ligne
+        </p>
+      </div>
     </form>
   );
 }
