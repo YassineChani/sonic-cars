@@ -33,6 +33,7 @@ export function AdminCarsClient({ initialCars, locations }: AdminCarsClientProps
   const [featured, setFeatured] = useState(false);
   const [availability, setAvailability] = useState(true);
   const [description, setDescription] = useState("");
+  const [galleryImages, setGalleryImages] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -52,6 +53,7 @@ export function AdminCarsClient({ initialCars, locations }: AdminCarsClientProps
     setFeatured(false);
     setAvailability(true);
     setDescription("");
+    setGalleryImages("");
     setIsModalOpen(true);
   }
 
@@ -70,6 +72,7 @@ export function AdminCarsClient({ initialCars, locations }: AdminCarsClientProps
     setFeatured(car.featured);
     setAvailability(car.availability);
     setDescription(car.description || "");
+    setGalleryImages(car.images ? car.images.map((i) => i.url).join("\n") : "");
     setIsModalOpen(true);
   }
 
@@ -106,6 +109,10 @@ export function AdminCarsClient({ initialCars, locations }: AdminCarsClientProps
       featured,
       availability,
       description: description || undefined,
+      galleryImages: galleryImages
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
     };
 
     try {
@@ -374,10 +381,21 @@ export function AdminCarsClient({ initialCars, locations }: AdminCarsClientProps
                 <label className="block text-white/50 text-xs uppercase tracking-wider mb-1">URL de l'image principale</label>
                 <input
                   type="text"
-                  placeholder="https://images.unsplash.com/..."
+                  placeholder="/images/clio.jpg ou https://..."
                   value={mainImage}
                   onChange={(e) => setMainImage(e.target.value)}
                   className="input-dark text-sm py-2"
+                />
+              </div>
+
+              <div>
+                <label className="block text-white/50 text-xs uppercase tracking-wider mb-1">Galerie de photos (URLs supplémentaires, 1 par ligne)</label>
+                <textarea
+                  rows={3}
+                  placeholder="/images/clio-side.jpg&#10;/images/clio-inside.jpg"
+                  value={galleryImages}
+                  onChange={(e) => setGalleryImages(e.target.value)}
+                  className="input-dark text-sm py-2 font-mono"
                 />
               </div>
 

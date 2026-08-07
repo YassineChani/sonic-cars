@@ -87,10 +87,16 @@ export async function POST(request: NextRequest) {
         returnLocation: body.returnLocation,
         insuranceNotes: body.insuranceNotes,
         rentalNotes: body.rentalNotes,
+        images: body.galleryImages && Array.isArray(body.galleryImages) && body.galleryImages.length > 0 ? {
+          create: body.galleryImages.map((url: string, index: number) => ({
+            url,
+            order: index,
+          })),
+        } : undefined,
       },
       include: {
         location: true,
-        images: true,
+        images: { orderBy: { order: "asc" } },
       },
     });
 

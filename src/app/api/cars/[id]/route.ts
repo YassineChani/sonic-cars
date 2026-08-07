@@ -58,8 +58,27 @@ export async function PUT(request: NextRequest, { params }: Params) {
         insuranceNotes: body.insuranceNotes,
         rentalNotes: body.rentalNotes,
       },
-      include: { location: true, images: true },
+      include: { location: true, images: { orderBy: { order: "asc" } } },
     });
+
+    if (body.galleryImages && Array.isArray(body.galleryImages)) {
+      await prisma.carImage.deleteMany({ where: { carId: id } });
+      if (body.galleryImages.length > 0) {
+        await prisma.carImage.createMany({
+          data: body.galleryImages.map((url: string, index: number) => ({
+            carId: id,
+            url,
+            order: index,
+          })),
+        });
+      }
+      
+      const updatedCar = await prisma.car.findUnique({
+        where: { id },
+        include: { location: true, images: { orderBy: { order: "asc" } } },
+      });
+      return NextResponse.json(updatedCar);
+    }
 
     return NextResponse.json(car);
   } catch (error: any) {
