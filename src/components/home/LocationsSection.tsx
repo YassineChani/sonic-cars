@@ -27,8 +27,8 @@ export function LocationsSection() {
     <section className="section-padding bg-zinc-950 border-t border-b border-white/5">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="text-center max-w-3xl mx-auto mb-20 md:mb-24">
+          <div className="flex items-center justify-center gap-4 mb-6">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
               Présence Nationale
@@ -36,12 +36,12 @@ export function LocationsSection() {
             <div className="divider-red" />
           </div>
           <h2
-            className="text-4xl md:text-5xl font-black text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Nos Agences au <span className="text-red-500">Maroc</span>
           </h2>
-          <p className="text-white/50 text-lg leading-relaxed max-w-xl mx-auto">
+          <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-light">
             Retrouvez-nous dans nos agences principales à Oujda et Tanger.
           </p>
         </div>
