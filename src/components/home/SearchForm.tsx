@@ -23,8 +23,8 @@ export function SearchForm() {
   return (
     <section className="relative z-20 -mt-12">
       <div className="container-custom">
-        <div className="glass border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
-          <div className="mb-5">
+        <div className="glass border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl">
+          <div className="mb-8">
             <h2 className="text-white font-bold text-xl" style={{ fontFamily: "var(--font-outfit)" }}>
               Trouvez votre voiture
             </h2>
@@ -32,7 +32,7 @@ export function SearchForm() {
           </div>
 
           <form onSubmit={handleSearch}>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {/* Moroccan City Select */}
               <div className="relative">
                 <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">Ville</label>

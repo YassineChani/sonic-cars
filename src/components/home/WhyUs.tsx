@@ -56,8 +56,8 @@ export function WhyUs() {
     <section className="section-padding bg-zinc-950">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <div className="flex items-center justify-center gap-3 mb-6">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
               Pourquoi Nous
@@ -65,7 +65,7 @@ export function WhyUs() {
             <div className="divider-red" />
           </div>
           <h2
-            className="text-4xl md:text-5xl font-black text-white mb-4"
+            className="text-4xl md:text-5xl font-black text-white mb-6"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Pourquoi Choisir{" "}
@@ -77,23 +77,23 @@ export function WhyUs() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reasons.map((reason, i) => {
             const Icon = reason.icon;
             return (
               <div
                 key={i}
-                className={`relative group p-6 rounded-2xl border ${reason.border} ${reason.bg} hover:border-opacity-50 transition-all duration-300 hover:-translate-y-1 cursor-default`}
+                className={`relative group p-8 rounded-2xl border ${reason.border} ${reason.bg} hover:border-opacity-50 transition-all duration-300 hover:-translate-y-1 cursor-default`}
               >
                 {/* Icon */}
                 <div
-                  className={`w-12 h-12 rounded-xl ${reason.bg} border ${reason.border} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-12 h-12 rounded-xl ${reason.bg} border ${reason.border} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   <Icon size={22} className={reason.color} />
                 </div>
 
                 <h3
-                  className="text-white font-bold text-lg mb-2"
+                  className="text-white font-bold text-lg mb-3"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {reason.title}

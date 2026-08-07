@@ -35,7 +35,7 @@ export function HowItWorks() {
 
       <div className="container-custom relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-20">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
@@ -55,7 +55,7 @@ export function HowItWorks() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {steps.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -65,8 +65,8 @@ export function HowItWorks() {
                   <div className="hidden lg:block absolute top-10 left-[60%] right-[-40%] h-[2px] bg-gradient-to-r from-red-500/40 to-transparent z-0" />
                 )}
 
-                <div className="glass border border-white/10 rounded-2xl p-6 relative z-10 transition-all duration-300 group-hover:-translate-y-2 group-hover:border-red-500/40">
-                  <div className="flex items-center justify-between mb-6">
+                <div className="glass border border-white/10 rounded-2xl p-8 relative z-10 transition-all duration-300 group-hover:-translate-y-2 group-hover:border-red-500/40">
+                  <div className="flex items-center justify-between mb-8">
                     <div className="w-14 h-14 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
                       <Icon size={26} />
                     </div>

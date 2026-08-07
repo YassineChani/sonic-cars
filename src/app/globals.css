@@ -365,12 +365,12 @@ select.input-admin { cursor: pointer; }
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-xl);
   transition: var(--transition);
-  padding: var(--space-6);
+  padding: var(--space-8);
 }
 
 .card-dark:hover {
   border-color: rgba(239, 68, 68, 0.25);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -454,17 +454,17 @@ select.input-admin { cursor: pointer; }
 /* ════════════════════════════════════════════════════════════════
    LAYOUT SECTIONS
    ════════════════════════════════════════════════════════════════ */
-.section-padding    { padding: 120px 0; }
-.section-padding-sm { padding: 80px 0; }
+.section-padding    { padding: 140px 0; }
+.section-padding-sm { padding: 100px 0; }
 
 .container-custom {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-8);
+  padding: 0 var(--space-10);
 }
 
-.section-gap    > * + * { margin-top: var(--space-8); }
-.section-gap-lg > * + * { margin-top: var(--space-12); }
+.section-gap    > * + * { margin-top: var(--space-10); }
+.section-gap-lg > * + * { margin-top: var(--space-16); }
 
 /* ── Divider ── */
 .divider-red {
@@ -586,9 +586,9 @@ select.input-admin { cursor: pointer; }
    RESPONSIVE
    ════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .section-padding    { padding: 72px 0; }
-  .section-padding-sm { padding: 48px 0; }
-  .container-custom   { padding: 0 var(--space-5); }
+  .section-padding    { padding: 88px 0; }
+  .section-padding-sm { padding: 64px 0; }
+  .container-custom   { padding: 0 var(--space-6); }
   .whatsapp-float {
     bottom: 20px;
     right: 20px;

@@ -52,7 +52,7 @@ export function CarCard({ car }: CarCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-5">
+      <div className="p-6">
         {/* Title */}
         <h3
           className="text-white font-bold text-lg mb-1 group-hover:text-red-400 transition-colors line-clamp-1"
@@ -60,10 +60,10 @@ export function CarCard({ car }: CarCardProps) {
         >
           {car.brand} {car.model}
         </h3>
-        <p className="text-white/40 text-xs mb-4">{car.year} · {car.transmission}</p>
+        <p className="text-white/40 text-xs mb-5">{car.year} · {car.transmission}</p>
 
         {/* Specs */}
-        <div className="grid grid-cols-3 gap-3 mb-5">
+        <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="flex flex-col items-center gap-1 p-2.5 rounded-lg bg-white/4 border border-white/6">
             <Users size={14} className="text-red-500" />
             <span className="text-white text-xs font-medium">{car.seats}</span>
@@ -82,7 +82,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <Link
             href={`/voitures/${car.slug}`}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg border border-white/15 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all"

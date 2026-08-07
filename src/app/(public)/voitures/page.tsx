@@ -46,11 +46,11 @@ export default async function FleetPage() {
   const [cars, locations] = await Promise.all([getCars(), getLocations()]);
 
   return (
-    <div className="pt-28 md:pt-36 pb-20">
+    <div className="pt-32 md:pt-44 pb-32">
       <div className="container-custom">
         {/* Header */}
-        <div className="mt-6 md:mt-10 mb-12">
-          <div className="flex items-center gap-3 mb-3">
+        <div className="mt-8 md:mt-14 mb-16">
+          <div className="flex items-center gap-3 mb-5">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
               Catalogue Complet
@@ -62,7 +62,7 @@ export default async function FleetPage() {
           >
             Notre <span className="text-red-500">Flotte</span>
           </h1>
-          <p className="text-white/50 text-lg mt-3">
+          <p className="text-white/50 text-lg mt-5">
             Découvrez nos modèles disponibles à la location à Oujda et Tanger.
           </p>
         </div>

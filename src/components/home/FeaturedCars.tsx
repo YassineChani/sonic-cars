@@ -12,7 +12,7 @@ export function FeaturedCars({ cars }: FeaturedCarsProps) {
     <section className="section-padding">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <div className="divider-red" />
@@ -41,7 +41,7 @@ export function FeaturedCars({ cars }: FeaturedCarsProps) {
 
         {/* Grid */}
         {cars.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {cars.map((car) => (
               <CarCard key={car.id} car={car as any} />
             ))}

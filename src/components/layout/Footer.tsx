@@ -33,11 +33,11 @@ export function Footer() {
   return (
     <footer className="bg-zinc-950 border-t border-white/8">
       {/* Main Footer */}
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container-custom py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20">
           {/* Brand & Socials */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
+            <Link href="/" className="inline-block mb-8">
               <span
                 className="text-2xl font-black tracking-wider"
                 style={{ fontFamily: "var(--font-outfit)" }}
@@ -46,14 +46,14 @@ export function Footer() {
                 <span className="text-red-500"> CARS</span>
               </span>
             </Link>
-            <p className="text-white/50 text-sm leading-relaxed mb-6">
+            <p className="text-white/50 text-sm leading-relaxed mb-10">
               Location de voiture premium à Oujda et Tanger. Flotte moderne, service irréprochable, réservation rapide.
             </p>
             
             {/* Social Media Links */}
             <div className="space-y-3">
               <span className="text-xs text-white/40 font-semibold uppercase tracking-wider block">Suivez-nous</span>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {/* Instagram SVG */}
                 <a
                   href="https://www.instagram.com/soniccars2025"
@@ -109,10 +109,10 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
+            <h3 className="text-white font-semibold mb-7 text-sm uppercase tracking-wider">
               Navigation
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {footerLinks.pages.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -129,10 +129,10 @@ export function Footer() {
 
           {/* Flotte */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
+            <h3 className="text-white font-semibold mb-7 text-sm uppercase tracking-wider">
               Notre Flotte
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {footerLinks.fleet.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -149,10 +149,10 @@ export function Footer() {
 
           {/* Contact Phones */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
+            <h3 className="text-white font-semibold mb-7 text-sm uppercase tracking-wider">
               Contact & Téléphones
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               <li>
                 <div className="flex items-start gap-3">
                   <MapPin size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
@@ -195,11 +195,11 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/8">
-        <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="container-custom py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/30 text-sm">
             © {new Date().getFullYear()} SONIC CARS. Tous droits réservés.
           </p>
-          <div className="flex gap-6">
+          <div className="flex gap-8">
             {footerLinks.info.map((link) => (
               <Link
                 key={link.href}

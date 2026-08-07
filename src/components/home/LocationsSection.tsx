@@ -27,7 +27,7 @@ export function LocationsSection() {
     <section className="section-padding bg-zinc-950 border-t border-b border-white/5">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-20">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="divider-red" />
             <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
@@ -47,13 +47,13 @@ export function LocationsSection() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {locations.map((loc) => (
             <div
               key={loc.city}
               className="card-dark group overflow-hidden flex flex-col justify-between"
             >
-              <div className="p-8">
+              <div className="p-10">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-red-500 font-semibold text-xs tracking-widest uppercase">
                     Agence Principale
@@ -90,7 +90,7 @@ export function LocationsSection() {
                 </div>
               </div>
 
-              <div className="p-6 bg-white/5 border-t border-white/5 flex items-center justify-between">
+              <div className="p-8 bg-white/5 border-t border-white/5 flex items-center justify-between">
                 <Link
                   href={`/voitures?city=${loc.city.toLowerCase()}`}
                   className="text-white font-medium text-sm hover:text-red-400 flex items-center gap-2 transition-colors"

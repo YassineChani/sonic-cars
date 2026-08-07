@@ -73,7 +73,7 @@ export function HeroSection() {
       <div className="container-custom relative z-10 pt-24">
         <div className="max-w-4xl mx-auto text-center">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 mb-10">
             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             <span className="text-red-400 text-sm font-medium tracking-wider uppercase">
               Oujda · Tanger · Maroc
@@ -82,7 +82,7 @@ export function HeroSection() {
 
           {/* Headline */}
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-none tracking-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-none tracking-tight"
             style={{ fontFamily: "var(--font-outfit)", textShadow: "0 0 60px rgba(239,68,68,0.15)" }}
             key={current}
           >
@@ -94,12 +94,12 @@ export function HeroSection() {
           </h1>
 
           {/* Subline */}
-          <p className="text-white/60 text-xl md:text-2xl mb-12 font-light max-w-2xl mx-auto">
+          <p className="text-white/60 text-xl md:text-2xl mb-14 font-light max-w-2xl mx-auto">
             {slide.subline}
           </p>
 
           {/* Stats row */}
-          <div className="flex items-center justify-center gap-8 md:gap-16 mb-12">
+          <div className="flex items-center justify-center gap-10 md:gap-20 mb-16">
             {[
               { value: "14+", label: "Véhicules" },
               { value: "2", label: "Villes" },
@@ -109,13 +109,13 @@ export function HeroSection() {
                 <div className="text-3xl md:text-4xl font-black text-white" style={{ fontFamily: "var(--font-outfit)" }}>
                   {stat.value}
                 </div>
-                <div className="text-white/40 text-sm mt-1">{stat.label}</div>
+                <div className="text-white/40 text-sm mt-2">{stat.label}</div>
               </div>
             ))}
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <Link href="/voitures" className="btn-primary text-base px-8 py-4 w-full sm:w-auto">
               Voir la Flotte
               <ArrowRight size={18} />
@@ -126,7 +126,7 @@ export function HeroSection() {
           </div>
 
           {/* Location badges */}
-          <div className="flex items-center justify-center gap-4 mt-10">
+          <div className="flex items-center justify-center gap-5 mt-14">
             {["Oujda", "Tanger"].map((city) => (
               <div
                 key={city}
