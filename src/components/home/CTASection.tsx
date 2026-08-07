@@ -9,16 +9,20 @@ export function CTASection() {
 
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-red-500 font-semibold text-xs uppercase tracking-widest mb-3 block">
-            Prêt à partir ?
-          </span>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="divider-red" />
+            <span className="text-red-500 font-semibold text-xs uppercase tracking-widest block">
+              Prêt à partir ?
+            </span>
+            <div className="divider-red" />
+          </div>
           <h2
             className="text-4xl md:text-6xl font-black text-white mb-8"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Reservez Votre Véhicule Dès <span className="text-red-500">Aujourd'hui</span>
           </h2>
-          <p className="text-white/60 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-light">
+          <p className="text-white/60 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
             Profitez de tarifs avantageux et d'une expérience de conduite premium à Oujda et Tanger.
           </p>
 

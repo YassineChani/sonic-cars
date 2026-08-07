@@ -12,31 +12,32 @@ export function FeaturedCars({ cars }: FeaturedCarsProps) {
     <section className="section-padding">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="divider-red" />
-              <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
-                Notre Flotte
-              </span>
-            </div>
-            <h2
-              className="text-4xl md:text-5xl font-black text-white"
-              style={{ fontFamily: "var(--font-outfit)" }}
-            >
-              Véhicules <span className="text-red-500">Sélectionnés</span>
-            </h2>
-            <p className="text-white/50 mt-3 text-lg">
-              Découvrez nos meilleurs véhicules disponibles à Oujda et Tanger
-            </p>
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="divider-red" />
+            <span className="text-red-500 text-sm font-semibold uppercase tracking-widest">
+              Notre Flotte
+            </span>
+            <div className="divider-red" />
           </div>
-          <Link
-            href="/voitures"
-            className="btn-outline-red flex-shrink-0 self-start md:self-auto"
+          <h2
+            className="text-4xl md:text-5xl font-black text-white mb-5"
+            style={{ fontFamily: "var(--font-outfit)" }}
           >
-            Voir toute la flotte
-            <ArrowRight size={16} />
-          </Link>
+            Véhicules <span className="text-red-500">Sélectionnés</span>
+          </h2>
+          <p className="text-white/50 text-lg leading-relaxed mb-8 max-w-xl mx-auto">
+            Découvrez nos meilleurs véhicules disponibles à Oujda et Tanger.
+          </p>
+          <div className="flex justify-center">
+            <Link
+              href="/voitures"
+              className="btn-outline-red"
+            >
+              Voir toute la flotte
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
 
         {/* Grid */}

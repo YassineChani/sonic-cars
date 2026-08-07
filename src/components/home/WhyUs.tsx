@@ -71,7 +71,7 @@ export function WhyUs() {
             Pourquoi Choisir{" "}
             <span className="text-red-500">SONIC CARS</span>
           </h2>
-          <p className="text-white/50 text-lg">
+          <p className="text-white/50 text-lg leading-relaxed max-w-xl mx-auto">
             Des avantages pensés pour vous offrir la meilleure expérience de location possible.
           </p>
         </div>
