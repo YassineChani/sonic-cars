@@ -114,24 +114,25 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
     const waUrl = buildWhatsAppUrl("+212661382653", waMsg);
 
     return (
-      <div className="glass border border-emerald-500/30 rounded-3xl p-8 md:p-12 text-center space-y-8 max-w-xl mx-auto shadow-2xl">
+      <div className="glass border border-emerald-500/30 rounded-3xl p-8 md:p-12 text-center space-y-8 max-w-xl mx-auto shadow-2xl animate-fade-in-up">
         {/* Success Icon */}
-        <div className="w-24 h-24 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto ring-8 ring-emerald-500/10">
-          <Check size={48} />
+        <div className="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto ring-8 ring-emerald-500/10">
+          <Check size={40} />
         </div>
-        <div className="space-y-2">
+
+        <div className="space-y-3">
           <h2 className="text-3xl font-black text-white" style={{ fontFamily: "var(--font-outfit)" }}>
-            Demande Enregistrée !
+            Réservation Réussie !
           </h2>
-          <p className="text-emerald-400 text-sm font-semibold tracking-wider">
-            Référence : {successBooking.bookingRef}
+          <p className="text-emerald-400 text-sm font-semibold tracking-wider uppercase">
+            Référence : #{successBooking.bookingRef}
           </p>
         </div>
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-left space-y-4">
           {selectedCar && (
             <div className="flex items-center gap-4 pb-4 border-b border-white/10">
-              <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0">
+              <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/10">
                 <Image src={selectedCar.mainImage || "/placeholder-car.jpg"} alt={selectedCar.title} fill className="object-cover" />
               </div>
               <div>
@@ -157,23 +158,17 @@ export function PublicBookingForm({ cars, locations }: PublicBookingFormProps) {
         </div>
 
         <p className="text-white/60 text-sm leading-relaxed max-w-md mx-auto">
-          Notre équipe va vérifier la disponibilité et vous recontacter par téléphone / WhatsApp sous <strong className="text-white">30 minutes</strong>.
+          Votre demande a été enregistrée avec succès. Notre équipe vous recontactera sous <strong className="text-white">30 minutes</strong> pour valider les derniers détails.
         </p>
 
-        <div className="space-y-4 pt-2">
+        <div className="space-y-3 pt-2">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary w-full bg-emerald-600 hover:bg-emerald-500 justify-center text-base py-4 font-bold rounded-2xl shadow-lg"
           >
-            Confirmer sur WhatsApp
-          </a>
-          <a
-            href="/admin/bookings"
-            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 text-sm font-semibold transition-all"
-          >
-            🔐 Voir dans l'Espace Admin
+            💬 Envoyer sur WhatsApp
           </a>
           <button
             onClick={() => setSuccessBooking(null)}
